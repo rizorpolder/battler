@@ -1,0 +1,160 @@
+
+character_1.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Base
+  rotate: false
+  xy: 0, 55
+  size: 117, 201
+  orig: 257, 513
+  offset: 63, 245
+  index: -1
+Face
+  rotate: false
+  xy: 527, 3
+  size: 42, 60
+  orig: 257, 513
+  offset: 127, 434
+  index: -1
+Fist_L
+  rotate: true
+  xy: 640, 105
+  size: 47, 42
+  orig: 257, 513
+  offset: 98, 350
+  index: -1
+Fist_R
+  rotate: true
+  xy: 621, 152
+  size: 36, 41
+  orig: 257, 513
+  offset: 221, 381
+  index: -1
+Forearm_L
+  rotate: true
+  xy: 578, 188
+  size: 68, 52
+  orig: 257, 513
+  offset: 44, 318
+  index: -1
+Forearm_R
+  rotate: true
+  xy: 616, 7
+  size: 57, 71
+  orig: 257, 513
+  offset: 189, 324
+  index: -1
+Head
+  rotate: false
+  xy: 254, 5
+  size: 65, 81
+  orig: 257, 513
+  offset: 105, 431
+  index: -1
+Neck
+  rotate: false
+  xy: 578, 152
+  size: 43, 36
+  orig: 257, 513
+  offset: 109, 421
+  index: -1
+Shoulder_L
+  rotate: false
+  xy: 454, 4
+  size: 73, 124
+  orig: 257, 513
+  offset: 27, 312
+  index: -1
+Shoulder_R
+  rotate: false
+  xy: 384, 2
+  size: 70, 102
+  orig: 257, 513
+  offset: 159, 318
+  index: -1
+Thigh_L
+  rotate: false
+  xy: 343, 104
+  size: 72, 152
+  orig: 257, 513
+  offset: 70, 133
+  index: -1
+Thigh_R
+  rotate: false
+  xy: 254, 86
+  size: 89, 170
+  orig: 257, 513
+  offset: 128, 135
+  index: -1
+ankle_L
+  rotate: false
+  xy: 569, 5
+  size: 47, 58
+  orig: 257, 513
+  offset: 2, 3
+  index: -1
+ankle_R
+  rotate: true
+  xy: 527, 63
+  size: 88, 48
+  orig: 257, 513
+  offset: 164, 11
+  index: -1
+cap
+  rotate: true
+  xy: 630, 189
+  size: 67, 39
+  orig: 257, 513
+  offset: 104, 473
+  index: -1
+jacket_base
+  rotate: false
+  xy: 117, 80
+  size: 137, 176
+  orig: 257, 513
+  offset: 45, 278
+  index: -1
+jacket_shoulder_L
+  rotate: true
+  xy: 127, 0
+  size: 80, 127
+  orig: 257, 513
+  offset: 24, 310
+  index: -1
+jacket_shoulder_R
+  rotate: false
+  xy: 512, 151
+  size: 66, 105
+  orig: 257, 513
+  offset: 152, 317
+  index: -1
+jacket_sleeve_L
+  rotate: true
+  xy: 575, 64
+  size: 87, 65
+  orig: 257, 513
+  offset: 24, 309
+  index: -1
+jacket_sleeve_R
+  rotate: false
+  xy: 319, 10
+  size: 65, 76
+  orig: 257, 513
+  offset: 182, 315
+  index: -1
+shin_L
+  rotate: false
+  xy: 415, 128
+  size: 97, 128
+  orig: 257, 513
+  offset: 11, 46
+  index: -1
+shin_R
+  rotate: true
+  xy: 0, 1
+  size: 54, 127
+  orig: 257, 513
+  offset: 163, 37
+  index: -1
