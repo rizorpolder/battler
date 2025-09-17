@@ -2,9 +2,15 @@ namespace Game.Scripts.Data
 {
 	public class CharacterData
 	{
-		public int maxHealthPoints;
-		public int currentHealthPoints;
+		public int MaxHealthPoints;
+		public int CurrentHealthPoints;
+		public int AttackValue;
 
-		public int attackValue;
+		public static CharacterData Default => new CharacterData()
+		{
+			MaxHealthPoints = 100,
+			CurrentHealthPoints = 100,
+			AttackValue = 10,
+		};
 	}
 }
