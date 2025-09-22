@@ -12,8 +12,8 @@ namespace Game.Scripts.Context
 
 		protected override void Configure(IContainerBuilder builder)
 		{
-			builder.RegisterComponent(_gameController)
-				.As<IGameControllerData, IGameControllerListener, IGameControllerCommand>();
+			builder.RegisterComponent(_gameController).AsImplementedInterfaces();
+			builder.RegisterInstance<IContainerBuilder>(builder);
 		}
 	}
 }

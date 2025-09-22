@@ -4,7 +4,7 @@ namespace Game.Scripts.CoreGameplay.Controllers
 	{
 
 		public void MarkPlayerReady(bool isReady);
-		public void Hit();
+		public void EndOfTurn();
 		public void BattleResult();
 	}
 }

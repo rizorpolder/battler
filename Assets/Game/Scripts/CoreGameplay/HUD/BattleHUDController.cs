@@ -1,4 +1,3 @@
-using System;
 using Game.Scripts.CoreGameplay.Controllers;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,7 +19,7 @@ namespace Game.Scripts.CoreGameplay.HUD
 
 		private void OnButtonClickHandled()
 		{
-			_gameControllerCommand.Hit();
+			_gameControllerCommand.EndOfTurn();
 		}
 	}
 }
