@@ -1,6 +1,6 @@
 namespace Game.Scripts.Data
 {
-	public class CharacterData
+	public class InventoryItemData
 	{
 		
 	}

@@ -24,7 +24,7 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		private List<string> _playersTurns;
 
 		private bool _isLeftTurnFirst;
-
+		
 		private void Start()
 		{
 			//TODO temp "On server data received"
