@@ -6,7 +6,7 @@ using VContainer.Unity;
 
 namespace Game.Scripts.StartScreenTest.StartScreenView
 {
-	public class StartScreenView : MonoBehaviour, IStartable
+	public class StartScreenView : MonoBehaviour
 	{
 		[SerializeField] private Button _button;
 
@@ -20,6 +20,11 @@ namespace Game.Scripts.StartScreenTest.StartScreenView
 		public void Start()
 		{
 			_button.onClick.AddListener(OnButtonClickHandler);
+		}
+
+		[Inject]
+		public void Initialize(IObjectResolver resolver)
+		{
 		}
 	}
 }

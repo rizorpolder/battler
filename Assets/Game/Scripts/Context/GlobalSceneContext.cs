@@ -1,3 +1,4 @@
+using Game.Scripts.Data;
 using Game.Scripts.LoadingSystem;
 using Game.Scripts.Network.WebSocketController;
 using UnityEngine;
@@ -10,15 +11,17 @@ namespace Game.Scripts.Context
 	{
 		[SerializeField] private WSController _wsController;
 
-		private void Start()
-		{
-			DontDestroyOnLoad(this.gameObject);
-		}
-
 		protected override void Configure(IContainerBuilder builder)
 		{
+			DontDestroyOnLoad(this);
+
 			builder.Register<SceneLoader>(Lifetime.Singleton).AsImplementedInterfaces();
 			builder.RegisterComponent(_wsController).AsImplementedInterfaces();
+			builder.RegisterBuildCallback(resolver =>
+			{
+				var sceneLoader = resolver.Resolve<ISceneCommand>();
+				sceneLoader.LoadScene(SceneNames.Menu);
+			});
 		}
 	}
 }
