@@ -4,7 +4,7 @@ namespace Game.Scripts.Data
 {
 	public class UserData
 	{
-		public ResourceData ResourceData;
+		public Resource resource;
 		public CharacterData CharacterData;
 		public InventoryData InventoryData;
 	}

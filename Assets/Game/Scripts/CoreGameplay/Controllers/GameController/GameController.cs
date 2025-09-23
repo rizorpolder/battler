@@ -41,16 +41,16 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		{
 		}
 
-		private async void ExecutePlayerTurnsFlow()
-		{
-			foreach (var action in _playersTurns)
-			{
-				// по очереди выполняются комманды атакующего и атакуемого игрока (типа Attacker.Attack,Enemy.GetDamage)
-				//await targetPlayer.
-			}
-
-			EndOfTurn();
-		}
+		// private async void ExecutePlayerTurnsFlow()
+		// {
+		// 	foreach (var action in _playersTurns)
+		// 	{
+		// 		// по очереди выполняются комманды атакующего и атакуемого игрока (типа Attacker.Attack,Enemy.GetDamage)
+		// 		//await targetPlayer.
+		// 	}
+		//
+		// 	EndOfTurn();
+		// }
 
 		public void EndOfTurn()
 		{

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Game.Scripts.Data.Inventory;
 using Game.Scripts.Enums;
 using Game.Scripts.Services.SaveDataService;

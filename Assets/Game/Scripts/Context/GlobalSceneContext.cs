@@ -1,3 +1,4 @@
+using Game.Scripts.Controllers.Resources;
 using Game.Scripts.Data;
 using Game.Scripts.LoadingService;
 using Game.Scripts.Services.NetworkService;
@@ -18,13 +19,15 @@ namespace Game.Scripts.Context
 			DontDestroyOnLoad(this);
 
 			builder.Register<SceneLoader>(Lifetime.Singleton).AsImplementedInterfaces();
-			
+
+			builder.Register<ResourcesController>(Lifetime.Singleton).AsImplementedInterfaces();
+
 			//Save Data Service
 			builder.Register<JSONDataSerializer>(Lifetime.Scoped).As<IDataSerializer>();
 			builder.Register<PlayerPrefsDataSaver>(Lifetime.Singleton).As<IDataSaver>()
 				.WithParameter(new JSONDataSerializer());
 			builder.Register<SaveDataService>(Lifetime.Singleton).As<IDataSaverCommand>();
-			
+
 			//Network
 			builder.RegisterComponent(_wsController).AsImplementedInterfaces();
 
