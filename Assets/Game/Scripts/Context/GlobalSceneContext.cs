@@ -19,11 +19,13 @@ namespace Game.Scripts.Context
 
 			builder.Register<SceneLoader>(Lifetime.Singleton).AsImplementedInterfaces();
 			
+			//Save Data Service
 			builder.Register<JSONDataSerializer>(Lifetime.Scoped).As<IDataSerializer>();
-			
 			builder.Register<PlayerPrefsDataSaver>(Lifetime.Singleton).As<IDataSaver>()
 				.WithParameter(new JSONDataSerializer());
+			builder.Register<SaveDataService>(Lifetime.Singleton).As<IDataSaverCommand>();
 			
+			//Network
 			builder.RegisterComponent(_wsController).AsImplementedInterfaces();
 
 

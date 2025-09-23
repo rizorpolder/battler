@@ -11,7 +11,7 @@ namespace Game.Scripts.StartScreenTest.StartScreenView
 		[SerializeField] private Button _button;
 
 		[Inject] private IStartScreenCommand _startScreenCommand;
-
+		[Inject] private IDataSaverCommand dataSaverCommand;
 		private void OnButtonClickHandler()
 		{
 			_startScreenCommand.LoadBattleScene(SceneNames.Battle);
