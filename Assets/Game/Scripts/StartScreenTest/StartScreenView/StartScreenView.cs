@@ -1,3 +1,4 @@
+using Game.Scripts.Controllers.Inventory;
 using Game.Scripts.Data;
 using Game.Scripts.Services.SaveDataService;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace Game.Scripts.StartScreenTest.StartScreenView
 		[SerializeField] private Button _button;
 
 		[Inject] private IStartScreenCommand _startScreenCommand;
-		[Inject] private IDataSaverCommand dataSaverCommand;
+		[Inject] private IInventoryCommand dataSaverCommand;
 		private void OnButtonClickHandler()
 		{
 			_startScreenCommand.LoadBattleScene(SceneNames.Battle);

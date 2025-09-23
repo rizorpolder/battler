@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Game.Scripts.Data.Inventory;
+using Game.Scripts.Enums;
+using Game.Scripts.Services.SaveDataService;
+using VContainer;
 
 namespace Game.Scripts.Controllers.Inventory
 {
@@ -8,14 +11,23 @@ namespace Game.Scripts.Controllers.Inventory
 	{
 		public event Action<InventoryItemData> OnItemEquipped;
 		public event Action<InventoryItemData> OnItemUnequipped;
-		
-		List<InventoryItemData> _items;
 
-		public void Initialize(InventoryData inventoryData)
+		InventoryData _inventoryData;
+
+		[Inject]
+		public void Initialize(IDataSaverCommand saverCommand)
 		{
-			
+			if (!saverCommand.TryLoadData(SaveDataType.Inventory, out _inventoryData))
+			{
+				_inventoryData = InventoryData.Default;
+				_inventoryData.Items.Add(new InventoryItemData()
+				{
+					ItemID = "Носок",
+				});
+				saverCommand.TrySaveData(_inventoryData, SaveDataType.Inventory);
+			}
 		}
-		
+
 		public void EquipItem(InventoryItemData item)
 		{
 			OnItemEquipped?.Invoke(item);
@@ -28,7 +40,6 @@ namespace Game.Scripts.Controllers.Inventory
 
 		public void AddToInventory(InventoryItemData item)
 		{
-			
 		}
 	}
 }
