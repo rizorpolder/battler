@@ -114,7 +114,7 @@ namespace Game.Scripts.CoreGameplay.Controllers
 
 		private void EndOfBattle()
 		{
-			
+			OnBattleComplete?.Invoke(BattleResultType.Win);
 		}
 		
 		public void MarkPlayerReady(bool isReady)
