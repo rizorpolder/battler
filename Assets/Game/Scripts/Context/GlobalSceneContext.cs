@@ -1,6 +1,8 @@
 using Game.Scripts.Data;
-using Game.Scripts.LoadingSystem;
-using Game.Scripts.Network.WebSocketController;
+using Game.Scripts.LoadingService;
+using Game.Scripts.Services.NetworkService;
+using Game.Scripts.Services.SaveDataService;
+using Game.Scripts.Services.SaveDataService.DataSerializer;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -16,7 +18,15 @@ namespace Game.Scripts.Context
 			DontDestroyOnLoad(this);
 
 			builder.Register<SceneLoader>(Lifetime.Singleton).AsImplementedInterfaces();
+			
+			builder.Register<JSONDataSerializer>(Lifetime.Scoped).As<IDataSerializer>();
+			
+			builder.Register<PlayerPrefsDataSaver>(Lifetime.Singleton).As<IDataSaver>()
+				.WithParameter(new JSONDataSerializer());
+			
 			builder.RegisterComponent(_wsController).AsImplementedInterfaces();
+
+
 			builder.RegisterBuildCallback(resolver =>
 			{
 				var sceneLoader = resolver.Resolve<ISceneCommand>();

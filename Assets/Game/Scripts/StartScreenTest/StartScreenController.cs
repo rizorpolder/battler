@@ -1,4 +1,4 @@
-using Game.Scripts.LoadingSystem;
+using Game.Scripts.LoadingService;
 using VContainer;
 
 namespace Game.Scripts.StartScreenTest

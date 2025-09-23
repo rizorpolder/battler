@@ -3,7 +3,7 @@ using Firesplash.GameDevAssets.SocketIO;
 using Game.Scripts.CoreGameplay.Controllers;
 using UnityEngine;
 
-namespace Game.Scripts.Network.WebSocketController
+namespace Game.Scripts.Services.NetworkService
 {
 	public class WSController : MonoBehaviour, IWSControllerCommand, IWSControllerListener
 	{

@@ -1,7 +1,7 @@
 using System;
 using Game.Scripts.CoreGameplay.Controllers;
 using Game.Scripts.Data;
-using Game.Scripts.LoadingSystem;
+using Game.Scripts.LoadingService;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;

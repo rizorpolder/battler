@@ -1,6 +1,6 @@
 using System;
 
-namespace Game.Scripts.Network.WebSocketController
+namespace Game.Scripts.Services.NetworkService
 {
 	public interface IWSControllerListener
 	{

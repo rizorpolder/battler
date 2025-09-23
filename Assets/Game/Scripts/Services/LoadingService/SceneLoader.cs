@@ -2,7 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
-namespace Game.Scripts.LoadingSystem
+namespace Game.Scripts.LoadingService
 {
 	public class SceneLoader : ISceneCommand, ISceneListener
 	{

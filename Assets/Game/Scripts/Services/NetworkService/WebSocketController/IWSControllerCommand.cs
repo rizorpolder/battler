@@ -1,6 +1,6 @@
 using Game.Scripts.CoreGameplay.Controllers;
 
-namespace Game.Scripts.Network.WebSocketController
+namespace Game.Scripts.Services.NetworkService
 {
 	public interface IWSControllerCommand
 	{

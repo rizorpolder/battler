@@ -1,6 +1,6 @@
 using System;
 
-namespace Game.Scripts.LoadingSystem
+namespace Game.Scripts.LoadingService
 {
 	public interface ISceneListener
 	{
