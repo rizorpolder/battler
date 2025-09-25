@@ -37,6 +37,7 @@ namespace Game.Scripts.Context
 			//Configs
 			builder.RegisterInstance(_configsRepository.characterClassesConfig);
 			builder.RegisterInstance(_configsRepository.itemsConfig);
+			builder.RegisterInstance(_configsRepository.coreConfig);
 
 			builder.RegisterBuildCallback(resolver =>
 			{

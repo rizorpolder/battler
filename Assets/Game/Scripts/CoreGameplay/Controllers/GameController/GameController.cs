@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using Game.Scripts.CoreGameplay.Controllers.Player;
 using Game.Scripts.CoreGameplay.Data;
 using Game.Scripts.Enums;
-using UnityEngine;
-using Random = UnityEngine.Random;
+using Game.Scripts.Services.NetworkService;
+using VContainer;
+using VContainer.Unity;
 
 namespace Game.Scripts.CoreGameplay.Controllers
 {
-	public class GameController : MonoBehaviour, IGameControllerCommand, IGameControllerListener, IGameControllerData
+	public class GameController : IGameControllerCommand, IGameControllerListener, IGameControllerData,
+		IInstaller
 	{
 		public event Action<bool> OnPlayerReady;
 		public event Action OnPlayerTurn;
 		public event Action<BattleResultType> OnBattleComplete;
 
-		// [Inject] IWSControllerListener _listener;
-		// [Inject] IWSControllerCommand _command;
+		IWSControllerListener _listener;
+		IWSControllerCommand _command;
 
 		private List<PlayerStep> _playerSteps;
 
@@ -23,28 +25,12 @@ namespace Game.Scripts.CoreGameplay.Controllers
 
 		private PlayerController _player;
 		private PlayerController _enemy;
-		
-		
-		private void Start()
-		{
-			//TODO temp "On server data received"
-			InitializePlayersData();
-		}
 
-		private void InitializePlayersData()
+		[Inject]
+		public GameController(IWSControllerListener listener, IWSControllerCommand command)
 		{
-			ThrowTurnsPriority(); //Бросок жребия кто ходит первым
-			GeneratePlayersTurns(); //смешиваем ходы с учетом того, кто ходит первый
-
-			//по очереди берем ход и проигрываем анимацию, по окончании - возвращаем управление игроку.
-		}
-
-		private void ThrowTurnsPriority()
-		{
-		}
-
-		private void GeneratePlayersTurns()
-		{
+			_listener = listener;
+			_command = command;
 		}
 
 		private async void ExecutePlayerTurnsFlow()
@@ -53,25 +39,14 @@ namespace Game.Scripts.CoreGameplay.Controllers
 			{
 				var target = action.CallerType == UnitType.Enemy ? _player : _enemy;
 				target.ActionImpact(action.UnitAction);
-
 			}
-		
-			EndOfTurn();
+
+			_playerSteps.Clear();
 		}
 
 		public void EndOfTurn()
 		{
-			//TODO Конец текущего хода, 
-			_playerSteps.Clear();
-		}
-
-		public void BattleResult()
-		{
-		}
-
-		private void EndOfBattle()
-		{
-			OnBattleComplete?.Invoke(BattleResultType.Win);
+			ExecutePlayerTurnsFlow();
 		}
 
 		public void MarkPlayerReady()
@@ -80,18 +55,15 @@ namespace Game.Scripts.CoreGameplay.Controllers
 			OnPlayerReady?.Invoke(_isPlayerReady);
 		}
 
-		public void OnTurnCompleted()
-		{
-			OnPlayerTurn?.Invoke();
-		}
-
 		public void CreateAction(UnitType caller, AUnitAction action)
 		{
 			var step = new PlayerStep(caller, action);
 			_playerSteps.Add(step);
 		}
 
-		
+		public void Install(IContainerBuilder builder)
+		{
+		}
 	}
 
 	public enum BattleResultType

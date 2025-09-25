@@ -1,18 +1,19 @@
 using Game.Scripts.Context.Abstract;
 using Game.Scripts.CoreGameplay.Controllers;
-using UnityEngine;
+using Game.Scripts.CoreGameplay.Controllers.Player;
+using Game.Scripts.Enums;
 using VContainer;
-using VContainer.Unity;
 
 namespace Game.Scripts.Context
 {
 	public class BattleSceneContext : ASceneContext
 	{
-		[SerializeField] private GameController _gameController;
-
 		protected override void Configure(IContainerBuilder builder)
 		{
-			builder.RegisterComponent(_gameController).AsImplementedInterfaces();
+			builder.Register<GameController>(Lifetime.Singleton).AsImplementedInterfaces().WithParameter(builder);
+			builder.Register<PlayerController>(Lifetime.Singleton).AsImplementedInterfaces().WithParameter(true).Keyed(UnitType.Player);
+			builder.Register<PlayerController>(Lifetime.Singleton).AsImplementedInterfaces().WithParameter(false).Keyed(UnitType.Enemy);
+			
 		}
 	}
 }
