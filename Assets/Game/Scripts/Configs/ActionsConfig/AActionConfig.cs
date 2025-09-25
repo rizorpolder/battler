@@ -7,9 +7,13 @@ namespace Game.Scripts.Configs.ActionsConfig
 	{
 		[SerializeField] public int RequiredLevel;
 		[SerializeField] public string Name;
+		[SerializeField] public int Price;
+
 		[SerializeField] public int MinValue;
 		[SerializeField] public int MaxValue;
+
 		[SerializeField] public Sprite Icon;
+		
 		public abstract ActionType ActionType { get; }
 	}
 }

@@ -1,9 +1,7 @@
-using System.Collections.Generic;
-
-namespace Game.Scripts.CoreGameplay.Controllers.PlayerController
+namespace Game.Scripts.CoreGameplay.Controllers.Player
 {
 	public interface IPlayerData
 	{
-		List<string> PlayerActionQueue { get; }
+		
 	}
 }

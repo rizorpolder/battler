@@ -8,6 +8,6 @@ namespace Game.Scripts.Configs.ActionsConfig
 
 	public class HealingActionConfig : AActionConfig
 	{
-		public override ActionType ActionType  => ActionType.Heal;
+		public override ActionType ActionType  => ActionType.Spell;
 	}
 }

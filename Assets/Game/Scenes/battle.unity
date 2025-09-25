@@ -831,6 +831,8 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects:
   - {fileID: 1893392717}
+  - {fileID: 1525837410}
+  - {fileID: 1453018087}
   _gameController: {fileID: 1800286619}
 --- !u!4 &395784292
 Transform:

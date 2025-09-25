@@ -49,6 +49,7 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
+  _configsRepository: {fileID: 11400000, guid: 0dfce40b9c439d94e92cbf94a8aa8ac6, type: 2}
   _wsController: {fileID: 9157879902805302616}
 --- !u!1001 &328994785354038289
 PrefabInstance:

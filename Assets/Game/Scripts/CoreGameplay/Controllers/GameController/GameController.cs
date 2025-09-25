@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Game.Scripts.CoreGameplay.Controllers.Player;
+using Game.Scripts.CoreGameplay.Data;
+using Game.Scripts.Enums;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,11 +17,14 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		// [Inject] IWSControllerListener _listener;
 		// [Inject] IWSControllerCommand _command;
 
-		private List<string> _playersTurns;
+		private List<PlayerStep> _playerSteps;
 
-		private bool _isLeftTurnFirst;
 		private bool _isPlayerReady = false;
 
+		private PlayerController _player;
+		private PlayerController _enemy;
+		
+		
 		private void Start()
 		{
 			//TODO temp "On server data received"
@@ -41,21 +47,22 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		{
 		}
 
-		// private async void ExecutePlayerTurnsFlow()
-		// {
-		// 	foreach (var action in _playersTurns)
-		// 	{
-		// 		// по очереди выполняются комманды атакующего и атакуемого игрока (типа Attacker.Attack,Enemy.GetDamage)
-		// 		//await targetPlayer.
-		// 	}
-		//
-		// 	EndOfTurn();
-		// }
+		private async void ExecutePlayerTurnsFlow()
+		{
+			foreach (var action in _playerSteps)
+			{
+				var target = action.CallerType == UnitType.Enemy ? _player : _enemy;
+				target.ActionImpact(action.UnitAction);
+
+			}
+		
+			EndOfTurn();
+		}
 
 		public void EndOfTurn()
 		{
 			//TODO Конец текущего хода, 
-			_playersTurns.Clear();
+			_playerSteps.Clear();
 		}
 
 		public void BattleResult()
@@ -77,6 +84,14 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		{
 			OnPlayerTurn?.Invoke();
 		}
+
+		public void CreateAction(UnitType caller, AUnitAction action)
+		{
+			var step = new PlayerStep(caller, action);
+			_playerSteps.Add(step);
+		}
+
+		
 	}
 
 	public enum BattleResultType

@@ -1,9 +1,7 @@
-using System;
-
-namespace Game.Scripts.CoreGameplay.Controllers.PlayerController
+namespace Game.Scripts.CoreGameplay.Controllers.Player
 {
 	public interface IPlayerListener
 	{
-		public event Action OnPlayerDataChanged;
+		
 	}
 }

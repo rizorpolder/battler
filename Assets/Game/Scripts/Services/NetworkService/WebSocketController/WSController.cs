@@ -15,11 +15,6 @@ namespace Game.Scripts.Services.NetworkService
 		public event Action OnMatchmakingReady;
 		public event Action OnTurnResult;
 
-		private void Start()
-		{
-			DontDestroyOnLoad(this);
-		}
-
 		public void CreateConnection()
 		{
 			_socketIOCommunicator.Instance.Connect();

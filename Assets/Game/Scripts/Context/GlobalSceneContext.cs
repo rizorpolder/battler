@@ -1,3 +1,4 @@
+using Game.Scripts.Configs;
 using Game.Scripts.Controllers.Resources;
 using Game.Scripts.Data;
 using Game.Scripts.LoadingService;
@@ -12,6 +13,7 @@ namespace Game.Scripts.Context
 {
 	public class GlobalSceneContext : LifetimeScope
 	{
+		[SerializeField] private ConfigsRepository _configsRepository;
 		[SerializeField] private WSController _wsController;
 
 		protected override void Configure(IContainerBuilder builder)
@@ -31,6 +33,10 @@ namespace Game.Scripts.Context
 			//Network
 			builder.RegisterComponent(_wsController).AsImplementedInterfaces();
 
+
+			//Configs
+			builder.RegisterInstance(_configsRepository.characterClassesConfig);
+			builder.RegisterInstance(_configsRepository.itemsConfig);
 
 			builder.RegisterBuildCallback(resolver =>
 			{

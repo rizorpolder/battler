@@ -2,6 +2,14 @@ using System;
 
 namespace Game.Scripts.Data
 {
+	public enum ResourceType
+	{
+		Soft,
+		Hard,
+		Level,
+		Experience
+	}
+
 	public class Resource : ICloneable
 	{
 		public ResourceType Type;
