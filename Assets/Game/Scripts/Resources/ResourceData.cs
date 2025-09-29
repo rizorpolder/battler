@@ -1,6 +1,9 @@
 
+using System;
+
 namespace Game.Scripts.Resources
 {
+	[Serializable]
 	public class ResourceData
 	{
 		public int Soft;

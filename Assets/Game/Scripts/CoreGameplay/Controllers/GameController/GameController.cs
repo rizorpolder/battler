@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Game.Scripts.CoreGameplay.Controllers.Player;
-using Game.Scripts.CoreGameplay.Data;
 using Game.Scripts.Enums;
 using Game.Scripts.Services.NetworkService;
 using VContainer;
@@ -19,13 +17,9 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		IWSControllerListener _listener;
 		IWSControllerCommand _command;
 
-		private List<PlayerStep> _playerSteps;
 
 		private bool _isPlayerReady = false;
-
-		private PlayerController _player;
-		private PlayerController _enemy;
-
+		
 		[Inject]
 		public GameController(IWSControllerListener listener, IWSControllerCommand command)
 		{
@@ -35,13 +29,6 @@ namespace Game.Scripts.CoreGameplay.Controllers
 
 		private async void ExecutePlayerTurnsFlow()
 		{
-			foreach (var action in _playerSteps)
-			{
-				var target = action.CallerType == UnitType.Enemy ? _player : _enemy;
-				target.ActionImpact(action.UnitAction);
-			}
-
-			_playerSteps.Clear();
 		}
 
 		public void EndOfTurn()
@@ -49,18 +36,16 @@ namespace Game.Scripts.CoreGameplay.Controllers
 			ExecutePlayerTurnsFlow();
 		}
 
+		public void CreateAction()
+		{
+		}
+
 		public void MarkPlayerReady()
 		{
 			_isPlayerReady = !_isPlayerReady;
 			OnPlayerReady?.Invoke(_isPlayerReady);
 		}
-
-		public void CreateAction(UnitType caller, AUnitAction action)
-		{
-			var step = new PlayerStep(caller, action);
-			_playerSteps.Add(step);
-		}
-
+		
 		public void Install(IContainerBuilder builder)
 		{
 		}

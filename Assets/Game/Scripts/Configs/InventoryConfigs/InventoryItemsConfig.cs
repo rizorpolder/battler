@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Scripts.Enums.Inventory;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Scripts.Configs.InventoryConfigs
 {
@@ -13,10 +14,10 @@ namespace Game.Scripts.Configs.InventoryConfigs
 		
 		[SerializeField] private List<InventoryItemWrapper> _inventoryItems;
 
-		private bool GetItemByType(ItemType itemType, out List<InventoryItemConfig> result)
+		private bool GetItemByType(TItemPosition tItemPosition, out List<InventoryItemConfig> result)
 		{
 			result = null;
-			var wrapper = _inventoryItems.FirstOrDefault(x => x.Type.Equals(itemType));
+			var wrapper = _inventoryItems.FirstOrDefault(x => x.position.Equals(tItemPosition));
 			if (wrapper == null)
 				return false;
 
@@ -24,10 +25,10 @@ namespace Game.Scripts.Configs.InventoryConfigs
 			return true;
 		}
 
-		public bool GetItemByID(ItemType type, string id, out InventoryItemConfig config)
+		public bool GetItemByID(TItemPosition position, string id, out InventoryItemConfig config)
 		{
 			config = null;
-			if (GetItemByType(type, out List<InventoryItemConfig> result))
+			if (GetItemByType(position, out List<InventoryItemConfig> result))
 			{
 				var item = result.FirstOrDefault(x => x.ID.Equals(id));
 				if (item == null)
@@ -44,7 +45,7 @@ namespace Game.Scripts.Configs.InventoryConfigs
 	[Serializable]
 	public class InventoryItemWrapper
 	{
-		public ItemType Type;
+		[FormerlySerializedAs("Type")] public TItemPosition position;
 		public List<InventoryItemConfig> Items;
 	}
 }

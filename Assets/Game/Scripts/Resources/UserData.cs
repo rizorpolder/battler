@@ -3,10 +3,12 @@ using System.Collections.Generic;
 
 namespace Game.Scripts.Resources
 {
+	[Serializable]
 	public class UserData
 	{
 		public string UserID;
 		public string UserName;
+		
 		public List<KeyValueData> KeyValues;
 
 		public static UserData Default => new UserData()
@@ -14,7 +16,7 @@ namespace Game.Scripts.Resources
 			UserID = "",
 			UserName = "",
 			KeyValues = new List<KeyValueData>()
-			
+
 			//todo timers and other 
 		};
 	}

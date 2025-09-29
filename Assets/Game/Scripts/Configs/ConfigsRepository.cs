@@ -1,5 +1,5 @@
-using Game.Scripts.Configs.CharacterClassConfig;
 using Game.Scripts.Configs.InventoryConfigs;
+using Game.Scripts.Configs.UnitConfigs;
 using UnityEngine;
 
 namespace Game.Scripts.Configs
@@ -9,6 +9,7 @@ namespace Game.Scripts.Configs
 	{
 		[SerializeField] public CoreConfig coreConfig;
 		[SerializeField] public InventoryItemsConfig itemsConfig;
-		[SerializeField] public CharacterClassesConfig characterClassesConfig;
+		[SerializeField] public UnitClassesConfig unitClassesConfig;
+		[SerializeField] public UnitLevelsConfig unitLevelsConfig;
 	}
 }
