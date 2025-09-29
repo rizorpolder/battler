@@ -6,7 +6,7 @@ namespace Game.Scripts.Controllers.Inventory
 {
 	public interface IInventoryListener
 	{
-		public event Action<InventoryItemData> OnItemEquipped;
-		public event Action<InventoryItemData> OnItemUnequipped;
+		public event Action<InventoryItem> OnItemEquipped;
+		public event Action<InventoryItem> OnItemUnequipped;
 	}
 }

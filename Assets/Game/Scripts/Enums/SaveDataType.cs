@@ -4,6 +4,6 @@ namespace Game.Scripts.Enums
 	{
 		Resource,
 		Inventory,
-		Character,
+		Unit,
 	}
 }

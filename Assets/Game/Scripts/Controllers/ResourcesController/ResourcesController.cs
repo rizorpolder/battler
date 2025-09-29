@@ -16,46 +16,43 @@ namespace Game.Scripts.Controllers.Resources
 
 		#region ResourceData
 
-		private int _soft;
-		private int _hard;
-		private int _level;
-		private int _experience;
+		private ResourceModel _resourceModel;
 
-		public int Soft => _soft;
-		public int Hard => _hard;
-		public int Level => _level;
-		public int Experience => _experience;
+		public int Soft => _resourceModel.Soft;
+		public int Hard => _resourceModel.Hard;
+		public int Level => _resourceModel.Level;
+		public int Experience => _resourceModel.Experience;
 
 		private void SetSoft(int soft, bool castEvent = true)
 		{
-			var previous = _soft;
-			_soft = soft;
+			var previous = Soft;
+			_resourceModel.SetSoft(soft);
 			if (castEvent)
-				SoftResourceChanged?.Invoke(previous, _soft);
+				SoftResourceChanged?.Invoke(previous, Soft);
 		}
 
 		private void SetHard(int hard, bool castEvent = true)
 		{
-			var previous = _hard;
-			_hard = hard;
+			var previous = Hard;
+			_resourceModel.SetHard(hard);
 			if (castEvent)
-				HardResourceChanged?.Invoke(previous, _hard);
+				HardResourceChanged?.Invoke(previous, Hard);
 		}
 
 		private void SetLevel(int level, bool castEvent = true)
 		{
-			var previous = _level;
-			_level = level;
+			var previous = Level;
+			_resourceModel.SetLevel(level);
 			if (castEvent)
-				LevelResourceChanged?.Invoke(previous, _level);
+				LevelResourceChanged?.Invoke(previous, Level);
 		}
 
 		private void SetExperience(int exp, bool castEvent = true)
 		{
-			var previous = _experience;
-			_experience = exp;
+			var previous = Experience;
+			_resourceModel.SetExperience(exp);
 			if (castEvent)
-				ExperienceResourceChanged?.Invoke(previous, _experience);
+				ExperienceResourceChanged?.Invoke(previous, Experience);
 		}
 
 		#endregion
@@ -68,6 +65,7 @@ namespace Game.Scripts.Controllers.Resources
 				result = ResourceData.Default;
 			}
 
+			_resourceModel = new ResourceModel();
 			ApplyData(result);
 		}
 
@@ -75,8 +73,6 @@ namespace Game.Scripts.Controllers.Resources
 		{
 			SetSoft(data.Soft, castEvent);
 			SetHard(data.Hard, castEvent);
-			SetLevel(data.Level, castEvent);
-			SetExperience(data.Experience, castEvent);
 		}
 
 		public void AddResource(Resource resource)
@@ -89,16 +85,16 @@ namespace Game.Scripts.Controllers.Resources
 			switch (type)
 			{
 				case ResourceType.Soft:
-					SetSoft(_soft + amount);
+					SetSoft(Soft + amount);
 					break;
 				case ResourceType.Hard:
-					SetHard(_hard + amount);
+					SetHard(Hard + amount);
 					break;
 				case ResourceType.Level:
-					SetLevel(_level + amount);
+					SetLevel(Level + amount);
 					break;
 				case ResourceType.Experience:
-					SetExperience(_experience + amount);
+					SetExperience(Experience + amount);
 					break;
 			}
 		}

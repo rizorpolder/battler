@@ -6,11 +6,8 @@ using Game.Scripts.Enums.Inventory;
 namespace Game.Scripts.Resources
 {
 	[Serializable]
-	public class UnitData //данные пользовательского персонажа
+	public class UnitData //данные пользовательского персонажа и уровень
 	{
-		public int Level;
-		public int Experience;
-		
 		public int UnitHealht;
 
 		public TUnitClass UnitClass;
@@ -21,7 +18,6 @@ namespace Game.Scripts.Resources
 
 		public static UnitData Default => new UnitData()
 		{
-			Level = 1,
 			UnitHealht = 100,
 			
 			UnitClass = TUnitClass.Warrior,

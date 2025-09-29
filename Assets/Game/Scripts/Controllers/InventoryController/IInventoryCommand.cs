@@ -5,10 +5,12 @@ namespace Game.Scripts.Controllers.Inventory
 {
 	public interface IInventoryCommand
 	{
-		public void EquipItem(InventoryItemData item);
-		public void UnequipItem(InventoryItemData item);
+		public void EquipItem(InventoryItem item);
+		public void UnequipItem(InventoryItem item);
 		
-		public void AddToInventory(InventoryItemData item);
-		
+		public void AddToInventory(InventoryItem item);
+
+		public void GetItemByID(string itemID);
+
 	}
 }
