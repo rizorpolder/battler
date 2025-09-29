@@ -5,8 +5,9 @@ using Game.Scripts.Enums.Inventory;
 
 namespace Game.Scripts.Resources
 {
+	///Сериализуемый тип пользовательского персонажа
 	[Serializable]
-	public class UnitData //данные пользовательского персонажа и уровень
+	public class UnitData
 	{
 		public int UnitHealht;
 

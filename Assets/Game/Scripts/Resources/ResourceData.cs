@@ -3,6 +3,7 @@ using System;
 
 namespace Game.Scripts.Resources
 {
+	///Сериализуемый тип для хранения данных (сервер/локально)
 	[Serializable]
 	public class ResourceData
 	{

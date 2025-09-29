@@ -73,6 +73,8 @@ namespace Game.Scripts.Controllers.Resources
 		{
 			SetSoft(data.Soft, castEvent);
 			SetHard(data.Hard, castEvent);
+			SetLevel(data.Level, castEvent);
+			SetExperience(data.Experience, castEvent);
 		}
 
 		public void AddResource(Resource resource)

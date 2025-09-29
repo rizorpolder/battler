@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 namespace Game.Scripts.Resources
 {
+	///Сеарелизуемые данные о пользователе
 	[Serializable]
 	public class UserData
 	{
 		public string UserID;
 		public string UserName;
-		
+
 		public List<KeyValueData> KeyValues;
 
 		public static UserData Default => new UserData()

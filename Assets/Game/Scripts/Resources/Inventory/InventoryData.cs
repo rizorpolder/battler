@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 
 namespace Game.Scripts.Data.Inventory
 {
-	public class InventoryData
+	///Сериализуемый класс для сохранения данных на сервер/локально
+	[Serializable]
+	public class InventoryData 
 	{
 		public List<InventoryItemData> Items;
 
