@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using Game.Scripts.Data;
 
 namespace Game.Scripts.Controllers
 {
 	public interface IUnitData
 	{
-		public List<int> UnitAction { get; }
+		public List<UnitAction> UnitActions { get; }
 	}
 }

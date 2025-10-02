@@ -1,23 +1,8 @@
-using System;
-using System.Collections.Generic;
 using Game.Scripts.Configs.UnitConfigs;
 using UnityEngine;
 
 namespace Game.Scripts.Data
 {
-	public class UnitAction
-	{
-		public Sprite ActionSprite;
-
-		public int ActionPrice;
-		public string ActionID;
-
-		public TActionType ActionType;
-
-		public UnitActionParams ActionParams;
-		public List<UnitActonEffects> Effcts;
-	}
-
 	public class UnitActonEffects
 	{
 		private Sprite _effectSprite;
@@ -34,18 +19,5 @@ namespace Game.Scripts.Data
 			_params = _config.Params;
 			_roundsTick = _config.RoundsTick;
 		}
-	}
-
-	[Serializable]
-	public struct UnitActionParams
-	{
-		public int MinActionValue;
-		public int MaxActionValue;
-	}
-
-	public enum TActionType
-	{
-		Physical,
-		Magic,
 	}
 }

@@ -1,4 +1,5 @@
 using Game.Scripts.Controllers.Inventory;
+using Game.Scripts.Controllers.MatchmakingController;
 using Game.Scripts.Data;
 using Game.Scripts.Services.SaveDataService;
 using UnityEngine;
@@ -11,20 +12,15 @@ namespace Game.Scripts.StartScreenTest.StartScreenView
 	{
 		[SerializeField] private Button _button;
 
-		[Inject] private IStartScreenCommand _startScreenCommand;
+		[Inject] private IMatchmakingCommand _matchmakingCommand;
 		private void OnButtonClickHandler()
 		{
-			_startScreenCommand.LoadBattleScene(SceneNames.Battle);
+			_matchmakingCommand.FindMatchmaking();
 		}
 
 		public void Start()
 		{
 			_button.onClick.AddListener(OnButtonClickHandler);
-		}
-
-		[Inject]
-		public void Initialize(IObjectResolver resolver)
-		{
 		}
 	}
 }

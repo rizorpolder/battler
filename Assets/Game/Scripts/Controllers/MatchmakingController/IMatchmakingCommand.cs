@@ -5,5 +5,6 @@ namespace Game.Scripts.Controllers.MatchmakingController
 		public void FindMatchmaking();
 		
 		public void MarkPlayerAsReady();
+		public void PlayerEndTurn();
 	}
 }

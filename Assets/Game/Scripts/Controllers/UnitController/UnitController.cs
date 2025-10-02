@@ -14,14 +14,13 @@ namespace Game.Scripts.Controllers
 		private PlayerUnitModel _playerUnitModel;
 		private UnitModelFactory _unitModelFactory;
 
-		public List<int> UnitAction { get; }
-		
-		
+		private List<UnitAction> _unitActions;
+		public List<UnitAction> UnitActions => _unitActions;
+
 		public void Initialize()
 		{
-			
 		}
-		
+
 		[Inject]
 		public void Initialize(IDataSaverCommand dataSaverCommand, UnitModelFactory unitModelFactory)
 		{
@@ -39,6 +38,5 @@ namespace Game.Scripts.Controllers
 		{
 			_playerUnitModel = _unitModelFactory.Build(data);
 		}
-
 	}
 }

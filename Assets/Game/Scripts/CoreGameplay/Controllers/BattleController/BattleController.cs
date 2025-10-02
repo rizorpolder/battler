@@ -86,6 +86,7 @@ namespace Game.Scripts.CoreGameplay.Controllers
 
 		public void EndOfTurn()
 		{
+			_matchmakingCommand.PlayerEndTurn();
 		}
 
 		public void StartTurn()

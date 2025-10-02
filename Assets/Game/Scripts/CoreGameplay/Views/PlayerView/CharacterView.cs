@@ -21,11 +21,9 @@ namespace Game.Scripts.CoreGameplay.Views
 		[Inject]
 		public void ResolvePlayerCommand(IObjectResolver resolver)
 		{
-			var unitData =  resolver.Resolve<IUnitData>();
-			foreach (var action in unitData.UnitAction)
-			{
-				
-			}
+			//ресолвим controler
+			//берем данные персонажа
+			//обновляем вью
 		}
 
 		private void AddAction()

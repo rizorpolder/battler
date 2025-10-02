@@ -1,7 +1,9 @@
 using Game.Scripts.Configs;
+using Game.Scripts.Controllers.MatchmakingController;
 using Game.Scripts.Controllers.Resources;
 using Game.Scripts.Data;
 using Game.Scripts.LoadingService;
+using Game.Scripts.Resources;
 using Game.Scripts.Services.NetworkService;
 using Game.Scripts.Services.SaveDataService;
 using Game.Scripts.Services.SaveDataService.DataSerializer;
@@ -23,7 +25,7 @@ namespace Game.Scripts.Context
 			builder.Register<SceneLoader>(Lifetime.Singleton).AsImplementedInterfaces();
 
 			builder.Register<ResourcesController>(Lifetime.Singleton).AsImplementedInterfaces();
-
+			builder.Register<MatchmakingController>(Lifetime.Singleton).AsImplementedInterfaces();
 			//Save Data Service
 			builder.Register<JSONDataSerializer>(Lifetime.Scoped).As<IDataSerializer>();
 			builder.Register<PlayerPrefsDataSaver>(Lifetime.Singleton).As<IDataSaver>()
@@ -39,7 +41,7 @@ namespace Game.Scripts.Context
 			builder.RegisterInstance(_configsRepository.itemsConfig);
 			builder.RegisterInstance(_configsRepository.coreConfig);
 			builder.RegisterInstance(_configsRepository.unitLevelsConfig);
-			
+
 			builder.RegisterBuildCallback(resolver =>
 			{
 				var sceneLoader = resolver.Resolve<ISceneCommand>();
