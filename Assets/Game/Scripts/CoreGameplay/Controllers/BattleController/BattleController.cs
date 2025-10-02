@@ -40,19 +40,19 @@ namespace Game.Scripts.CoreGameplay.Controllers
 
 		public void AddPlayerAction(UnitAction action)
 		{
-			if (_currentTurnsCount < action.actionPrice)
+			if (_currentTurnsCount < action.ActionPrice)
 				return;
 
 			playerActionsQueue.Add(action);
 			OnActionAdded?.Invoke(action);
-			SpendTurnPoints(action.actionPrice);
+			SpendTurnPoints(action.ActionPrice);
 		}
 
 		public void RemovePlayerAction(UnitAction action)
 		{
 			playerActionsQueue.Remove(action);
 			OnActionRemoved?.Invoke(action);
-			AddTurnsPoints(action.actionPrice);
+			AddTurnsPoints(action.ActionPrice);
 		}
 
 		private void AddTurnsPoints(int points)

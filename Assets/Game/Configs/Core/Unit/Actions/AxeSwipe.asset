@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4782a035c1b44f29ec2de2e09ffc74c, type: 3}
-  m_Name: Punch
+  m_Name: AxeSwipe
   m_EditorClassIdentifier: 
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 81c7583be439c444a8e1082425948d6e, type: 3}
   _actionType: 0
   _params:
-    minActionValue: 1
-    maxActionValue: 2
+    MinActionValue: 2
+    MaxActionValue: 5
   _effects:
   - {fileID: 11400000, guid: 8f714ba9e8917f54faedb9a7eb54c0a5, type: 2}

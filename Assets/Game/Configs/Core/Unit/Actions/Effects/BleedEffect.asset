@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a4a9bc096449b4a6556c3afc18afb7, type: 3}
   m_Name: BleedEffect
   m_EditorClassIdentifier: 
+  _effectSprite: {fileID: 21300000, guid: 1ee280b46df95aa428bfe7a65f28178f, type: 3}
   _effect: 1
   _actionType: 0
   _params:
-    minActionValue: 1
-    maxActionValue: 2
+    MinActionValue: 1
+    MaxActionValue: 2
   _roundsTick: 5
