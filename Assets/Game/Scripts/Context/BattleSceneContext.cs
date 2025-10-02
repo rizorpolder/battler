@@ -8,7 +8,7 @@ namespace Game.Scripts.Context
 	{
 		protected override void Configure(IContainerBuilder builder)
 		{
-			builder.Register<GameController>(Lifetime.Singleton).AsImplementedInterfaces().WithParameter(builder);
+			builder.Register<BattleController>(Lifetime.Singleton).AsImplementedInterfaces().WithParameter(builder);
 		}
 	}
 }

@@ -11,7 +11,7 @@ namespace Game.Scripts.Services.NetworkService
 
 		public void PlayerEndTurn();
 
-		public void OnBattleEnd(BattleResultType result);
+		public void OnBattleEnd();
 
 	}
 }

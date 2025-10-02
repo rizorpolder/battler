@@ -30,7 +30,9 @@ namespace Game.Scripts.Helpers
 			var result = new PlayerUnitModel();
 			foreach (var equippedItem in unitData.EquippedItems)
 			{
-				_inventoryCommand.GetItemByID(equippedItem.itemID);
+				var item = _inventoryCommand.GetItemByID(equippedItem.itemID);
+				if (item == null) continue;
+					//result.
 			}
 
 			return result;

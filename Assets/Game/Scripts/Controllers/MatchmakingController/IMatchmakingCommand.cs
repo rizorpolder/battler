@@ -1,0 +1,9 @@
+namespace Game.Scripts.Controllers.MatchmakingController
+{
+	public interface IMatchmakingCommand
+	{
+		public void FindMatchmaking();
+		
+		public void MarkPlayerAsReady();
+	}
+}

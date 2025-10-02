@@ -14,8 +14,8 @@ namespace Game.Scripts.CoreGameplay.HUD
 		[SerializeField] private Button _endOfTurnButton;
 		[SerializeField] private Button _leaveButton;
 
-		[Inject] IGameControllerCommand _gameControllerCommand;
-		[Inject] IGameControllerListener _gameControllerListener;
+		[Inject] IBattleControllerCommand _battleControllerCommand;
+		[Inject] IBattleControllerListener _battleControllerListener;
 
 		[Inject] ISceneCommand _sceneCommand;
 
@@ -24,7 +24,7 @@ namespace Game.Scripts.CoreGameplay.HUD
 			_readyButton.onClick.AddListener(OnButtonClickHandled);
 			_endOfTurnButton.onClick.AddListener(EndOfTurnHandler);
 			_leaveButton.onClick.AddListener(LeaveGameHandler);
-			_gameControllerListener.OnPlayerReady += OnPlayerReadyHandler;
+			//_gameControllerListener.OnPlayerReady += OnPlayerReadyHandler;
 		}
 
 		private void LeaveGameHandler()
@@ -39,17 +39,17 @@ namespace Game.Scripts.CoreGameplay.HUD
 
 		private void EndOfTurnHandler()
 		{
-			_gameControllerCommand.EndOfTurn();
+			_battleControllerCommand.EndOfTurn();
 		}
 
 		private void OnButtonClickHandled()
 		{
-			_gameControllerCommand.MarkPlayerReady();
+			_battleControllerCommand.MarkAsReady();
 		}
 
 		public void Dispose()
 		{
-			_gameControllerListener.OnPlayerReady -= OnPlayerReadyHandler;
+			//_battleControllerCommand.OnPlayerReady -= OnPlayerReadyHandler;
 
 			_readyButton.onClick.RemoveListener(OnButtonClickHandled);
 			_endOfTurnButton.onClick.RemoveListener(EndOfTurnHandler);

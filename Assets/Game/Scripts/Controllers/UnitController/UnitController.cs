@@ -1,11 +1,9 @@
-using Game.Scripts.Configs.UnitConfigs;
-using Game.Scripts.Controllers.Inventory;
+using System.Collections.Generic;
 using Game.Scripts.Data;
 using Game.Scripts.Enums;
 using Game.Scripts.Helpers;
 using Game.Scripts.Resources;
 using Game.Scripts.Services.SaveDataService;
-using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -16,10 +14,14 @@ namespace Game.Scripts.Controllers
 		private PlayerUnitModel _playerUnitModel;
 		private UnitModelFactory _unitModelFactory;
 
+		public List<int> UnitAction { get; }
+		
+		
 		public void Initialize()
 		{
+			
 		}
-
+		
 		[Inject]
 		public void Initialize(IDataSaverCommand dataSaverCommand, UnitModelFactory unitModelFactory)
 		{
@@ -32,9 +34,11 @@ namespace Game.Scripts.Controllers
 
 			CreatePlayerUnitModel(data);
 		}
+
 		private void CreatePlayerUnitModel(UnitData data)
 		{
 			_playerUnitModel = _unitModelFactory.Build(data);
 		}
+
 	}
 }

@@ -10,7 +10,7 @@ namespace Game.Scripts.Controllers.Inventory
 		
 		public void AddToInventory(InventoryItem item);
 
-		public void GetItemByID(string itemID);
+		public InventoryItem GetItemByID(string itemID);
 
 	}
 }

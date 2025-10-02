@@ -11,10 +11,10 @@ namespace Game.Scripts.Configs.InventoryConfigs
 	public class InventoryItemsConfig : ScriptableObject
 	{
 		//TODO переделать потом в AssetReferences (чтоб заполнялось по загрузке бандла)
-		
+		//TODO Формировать конфиг в рантайме 
 		[SerializeField] private List<InventoryItemWrapper> _inventoryItems;
 
-		private bool GetItemByType(TItemPosition tItemPosition, out List<InventoryItemConfig> result)
+		private bool GetItemByType(TItemPosition tItemPosition, out List<EquipableItemConfig> result)
 		{
 			result = null;
 			var wrapper = _inventoryItems.FirstOrDefault(x => x.position.Equals(tItemPosition));
@@ -25,10 +25,10 @@ namespace Game.Scripts.Configs.InventoryConfigs
 			return true;
 		}
 
-		public bool GetItemByID(TItemPosition position, string id, out InventoryItemConfig config)
+		public bool GetItemByID(TItemPosition position, string id, out EquipableItemConfig config)
 		{
 			config = null;
-			if (GetItemByType(position, out List<InventoryItemConfig> result))
+			if (GetItemByType(position, out List<EquipableItemConfig> result))
 			{
 				var item = result.FirstOrDefault(x => x.ID.Equals(id));
 				if (item == null)
@@ -46,6 +46,6 @@ namespace Game.Scripts.Configs.InventoryConfigs
 	public class InventoryItemWrapper
 	{
 		[FormerlySerializedAs("Type")] public TItemPosition position;
-		public List<InventoryItemConfig> Items;
+		public List<EquipableItemConfig> Items;
 	}
 }

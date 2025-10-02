@@ -284,7 +284,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1525837411}
   - {fileID: 1453018088}
@@ -1771,7 +1771,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _skeletonAnimation: {fileID: 542057233}
   _skillButton: {fileID: 301724481}
-  type: 1
+  _unitControl: 1
 --- !u!1 &1495099289
 GameObject:
   m_ObjectHideFlags: 0
@@ -2046,7 +2046,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _skeletonAnimation: {fileID: 1243980965}
   _skillButton: {fileID: 2005476083}
-  type: 0
+  _unitControl: 0
 --- !u!1 &1629947362
 GameObject:
   m_ObjectHideFlags: 0

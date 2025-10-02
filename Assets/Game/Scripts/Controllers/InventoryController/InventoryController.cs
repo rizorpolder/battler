@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Game.Scripts.Data.Inventory;
 using Game.Scripts.Enums;
 using Game.Scripts.Services.SaveDataService;
@@ -6,7 +7,6 @@ using VContainer;
 
 namespace Game.Scripts.Controllers.Inventory
 {
-	
 	//Хранит в себе все приобретенные вещи игрока, то что одето - лежит в Unit
 	public class InventoryController : IInventoryListener, IInventoryData, IInventoryCommand
 	{
@@ -47,8 +47,9 @@ namespace Game.Scripts.Controllers.Inventory
 		{
 		}
 
-		public void GetItemByID(string itemID)
+		public InventoryItem GetItemByID(string itemID)
 		{
+			return _inventoryModel._items.FirstOrDefault(x => x.ID == itemID);
 		}
 	}
 }

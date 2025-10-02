@@ -1,6 +1,5 @@
 using System;
 using Firesplash.GameDevAssets.SocketIO;
-using Game.Scripts.CoreGameplay.Controllers;
 using UnityEngine;
 
 namespace Game.Scripts.Services.NetworkService
@@ -81,7 +80,7 @@ namespace Game.Scripts.Services.NetworkService
 			OnTurnResult?.Invoke();
 		}
 
-		public void OnBattleEnd(BattleResultType result)
+		public void OnBattleEnd()
 		{
 			//ws.sent (battleCompleted, result(win/lose)
 		}
