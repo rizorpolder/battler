@@ -6,5 +6,7 @@ namespace Game.Scripts.Controllers.MatchmakingController
 		
 		public void MarkPlayerAsReady();
 		public void PlayerEndTurn();
+
+		public void CancelMatchmaking();
 	}
 }

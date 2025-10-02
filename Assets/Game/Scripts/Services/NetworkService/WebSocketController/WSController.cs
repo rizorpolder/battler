@@ -1,4 +1,6 @@
 using System;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Firesplash.GameDevAssets.SocketIO;
 using UnityEngine;
 
@@ -14,28 +16,44 @@ namespace Game.Scripts.Services.NetworkService
 		public event Action OnMatchmakingReady;
 		public event Action OnTurnResult;
 
+		private SocketIOInstance Instance => _socketIOCommunicator.Instance;
+
 		public void CreateConnection()
 		{
-			_socketIOCommunicator.Instance.Connect();
+			Debug.Log($"Status : {Instance.Status}");
+			if (Instance.IsConnected())
+				return;
 
-			_socketIOCommunicator.Instance.On("connected", OnSocketConnected);
-			_socketIOCommunicator.Instance.On("disconnected", OnSocketDisconnected);
+			var addr = "http://127.0.0.1:8080";
+			Instance.Connect(addr, false);
+			Instance.On("connected", OnSocketConnected);
+			Instance.On("disconnected", OnSocketDisconnected);
 		}
 
 		public void Disconnect()
 		{
+			if (!Instance.IsConnected())
+			{
+				Debug.Log("Not connected");
+				return;
+			}
+
+			Instance.Close();
 			UnsubscribeEvents();
-			_socketIOCommunicator.Instance.Close();
 		}
 
 		private void OnSocketConnected(string data)
 		{
+			Debug.Log("Connection established " + data);
+
 			SubscribeEvents();
 			OnConnectionEstablished?.Invoke();
 		}
 
 		private void OnSocketDisconnected(string data)
 		{
+			Debug.Log("Disconnected " + data);
+
 			UnsubscribeEvents();
 			OnConnectionLost?.Invoke();
 		}
@@ -43,23 +61,28 @@ namespace Game.Scripts.Services.NetworkService
 		private void SubscribeEvents()
 		{
 			//subscribe on all events after connected to socket
-			throw new NotImplementedException();
+			Instance.On("userConnected", UserConnected);
+			Instance.On("matchmakingReady", MatchmakingReady);
 		}
 
 		private void UnsubscribeEvents()
 		{
 			//unsubscribe after disconnect
-			throw new NotImplementedException();
+			Instance.Off("connected", OnSocketConnected);
+			Instance.Off("disconnected", OnSocketDisconnected);
+
+			Instance.Off("userConnected", UserConnected);
+			Instance.Off("matchmakingReady", MatchmakingReady);
 		}
 
 		//ws callback
-		public void UserConnected()
+		public void UserConnected(string data)
 		{
 			OnUserConnected?.Invoke();
 		}
 
 		// ws callback
-		public void MatchmakingReady()
+		public void MatchmakingReady(string data)
 		{
 			OnMatchmakingReady?.Invoke();
 		}
