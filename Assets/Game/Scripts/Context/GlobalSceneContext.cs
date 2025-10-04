@@ -42,6 +42,7 @@ namespace Game.Scripts.Context
 			builder.RegisterInstance(_configsRepository.itemsConfig);
 			builder.RegisterInstance(_configsRepository.coreConfig);
 			builder.RegisterInstance(_configsRepository.unitLevelsConfig);
+			builder.RegisterInstance(_configsRepository.charactersRepository);
 
 			builder.RegisterEntryPoint<InitialScreen>();
 			

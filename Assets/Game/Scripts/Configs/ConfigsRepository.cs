@@ -1,5 +1,6 @@
 using Game.Scripts.Configs.InventoryConfigs;
 using Game.Scripts.Configs.UnitConfigs;
+using Game.Scripts.test;
 using UnityEngine;
 
 namespace Game.Scripts.Configs
@@ -13,5 +14,8 @@ namespace Game.Scripts.Configs
 		[SerializeField] public InventoryItemsConfig itemsConfig;
 		[SerializeField] public UnitClassesRepository unitClassesRepository;
 		[SerializeField] public UnitLevelsConfig unitLevelsConfig;
+
+		[Space(20)]
+		[SerializeField] public TestCharactersRepository charactersRepository;
 	}
 }

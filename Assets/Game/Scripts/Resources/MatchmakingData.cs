@@ -10,6 +10,7 @@ namespace Game.Scripts.Resources
 		public string RoomID;
 		
 		public UnitData EnemyData;
+		public UnitData PlayerData;
 		
 	}
 }

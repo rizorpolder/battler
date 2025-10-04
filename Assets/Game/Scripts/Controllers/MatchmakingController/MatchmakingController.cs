@@ -1,7 +1,9 @@
 using System;
+using Game.Scripts.CoreGameplay.Data;
 using Game.Scripts.Data;
 using Game.Scripts.LoadingService;
 using Game.Scripts.Resources;
+using Game.Scripts.test;
 using UnityEngine;
 using VContainer;
 
@@ -9,10 +11,16 @@ namespace Game.Scripts.Controllers.MatchmakingController
 {
 	public class MatchmakingController : IMatchmakingListener, IMatchmakingData, IMatchmakingCommand
 	{
-		private MatchmakingData _data;
-		public MatchmakingData Data => _data;
+		private CharacterData _player;
+		private CharacterData _opponent;
+
+		public CharacterData PlayerData => _player;
+		public CharacterData OpponentData => _opponent;
 
 		private ISceneCommand _sceneCommand;
+
+		//temp
+		[Inject] private TestCharactersRepository _repository;
 
 		[Inject]
 		public MatchmakingController(ISceneCommand sceneCommand) //прокинуть сюда network controller
@@ -46,7 +54,8 @@ namespace Game.Scripts.Controllers.MatchmakingController
 
 		private void OnMatchmakingFound(MatchmakingData matchmakingData)
 		{
-			_data = matchmakingData;
+			_player = _repository.configs[0].GetCharacterData();
+			_opponent = _repository.configs[1].GetCharacterData();
 			_sceneCommand.LoadScene(SceneNames.Battle);
 		}
 	}
