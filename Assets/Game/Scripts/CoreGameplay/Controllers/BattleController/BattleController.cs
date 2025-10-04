@@ -12,7 +12,8 @@ using VContainer.Unity;
 
 namespace Game.Scripts.CoreGameplay.Controllers
 {
-	public class BattleController : IBattleControllerListener, IBattleControllerCommand, IBattleControllerData, IAsyncStartable
+	public class BattleController : IBattleControllerListener, IBattleControllerCommand, IBattleControllerData,
+		IAsyncStartable
 	{
 		public event Action OnBattleLoaded;
 		public event Action OnTurnPointsSpend;
@@ -20,21 +21,22 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		public event Action<UnitAction> OnActionAdded;
 		public event Action<UnitAction> OnActionRemoved;
 
-		private IMatchmakingCommand _matchmakingCommand;
-		private IMatchmakingData _matchmakingData;
-		private IMatchmakingListener _matchmakingListener;
+		[Inject] private IMatchmakingCommand _matchmakingCommand;
+		[Inject] private IMatchmakingData _matchmakingData;
+		[Inject] private IMatchmakingListener _matchmakingListener;
 
 		private int _maxTurnsCount;
 		private int _currentTurnsCount;
 
 		private List<UnitAction> playerActionsQueue;
 
-		[Inject]
-		public BattleController(IObjectResolver resolver)
+		public async UniTask StartAsync(CancellationToken cancellation = new CancellationToken())
 		{
-			_matchmakingListener = resolver.Resolve<IMatchmakingListener>();
-			_matchmakingData = resolver.Resolve<IMatchmakingData>();
-			_matchmakingCommand = resolver.Resolve<IMatchmakingCommand>();
+			Debug.Log("Starting Battle Controller");
+
+			await UniTask.Delay(TimeSpan.FromSeconds(4), cancellationToken: cancellation);
+
+			Debug.Log("Battle Controller loaded");
 		}
 
 		private void LoadBattleData()
@@ -99,16 +101,6 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		{
 			IncreaseMaxTurnPoints(1);
 			AddTurnsPoints(1);
-		}
-		
-		public async UniTask StartAsync(CancellationToken cancellation = new CancellationToken())
-		{
-			Debug.Log("Starting Battle Controller");
-			
-			await UniTask.Delay(TimeSpan.FromSeconds(4), cancellationToken: cancellation);
-			
-			Debug.Log("Battle Controller loaded");
-			
 		}
 	}
 

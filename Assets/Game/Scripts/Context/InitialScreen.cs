@@ -8,12 +8,13 @@ using VContainer.Unity;
 
 namespace Game.Scripts.Context
 {
-	public class InitialScreen : IAsyncStartable
+	public class InitialScreen :IInitializable, IAsyncStartable
 	{
 		[Inject] private ISceneCommand _command;
 
-		public void Initialize()
+		void IInitializable.Initialize()
 		{
+			//вызывается до сборки контейнера, но при этом все инъекции уже есть
 		}
 
 		public async UniTask StartAsync(CancellationToken cancellation = new CancellationToken())
@@ -21,7 +22,7 @@ namespace Game.Scripts.Context
 			//Load assets
 			//Load Data
 			//Initialize Services and Features (Ads, monetization, etc)
-			await UniTask.Delay(TimeSpan.FromSeconds(4));
+			//await UniTask.Delay(TimeSpan.FromSeconds(4));
 
 			_command.LoadScene(SceneNames.Menu);
 		}

@@ -1,4 +1,4 @@
-using Game.Scripts.Controllers;
+using Game.Scripts.CoreGameplay.Controllers;
 using Spine.Unity;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,17 +13,11 @@ namespace Game.Scripts.CoreGameplay.Views
 		
 		[SerializeField] private TUnitControl _unitControl;
 
+		[Inject] private IBattleControllerListener _battleControllerListener; 
+		
 		public void Start()
 		{
 			_skillButton.onClick.AddListener(AddAction);
-		}
-
-		[Inject]
-		public void ResolvePlayerCommand(IObjectResolver resolver)
-		{
-			//ресолвим controler
-			//берем данные персонажа
-			//обновляем вью
 		}
 
 		private void AddAction()
