@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 415e52bccc7c46eda8f6233cf9a91880, type: 3}
+  m_Name: Punch
+  m_EditorClassIdentifier: 
+  _id: Punch
+  _icon: {fileID: 0}
+  _minBaseDamage: 5
+  _maxBaseDamage: 10
+  _isMagic: 0
+  _scaleStat: 1
+  scalingFactor: 1
+  _effects:
+  - {fileID: 11400000, guid: c1b0a2897b0d5924c9749cc43a153339, type: 2}

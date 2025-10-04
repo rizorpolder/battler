@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace Game.Scripts.Configs
 {
-	[CreateAssetMenu(menuName = "Configs/ConfigsRepository", fileName = "ConfigsRepository")]
+	[CreateAssetMenu(menuName = "Configs/Configs Repository", fileName = "ConfigsRepository")]
 	public class ConfigsRepository : ScriptableObject
 	{
 		[SerializeField] public NetworkConfig networkConfig;
 
 		[SerializeField] public CoreConfig coreConfig;
 		[SerializeField] public InventoryItemsConfig itemsConfig;
-		[SerializeField] public UnitClassesConfig unitClassesConfig;
+		[SerializeField] public UnitClassesRepository unitClassesRepository;
 		[SerializeField] public UnitLevelsConfig unitLevelsConfig;
 	}
 }

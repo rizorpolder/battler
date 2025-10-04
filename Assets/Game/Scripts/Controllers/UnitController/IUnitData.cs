@@ -5,6 +5,6 @@ namespace Game.Scripts.Controllers
 {
 	public interface IUnitData
 	{
-		public List<UnitAction> UnitActions { get; }
+		//public List<UnitAction> UnitActions { get; }
 	}
 }

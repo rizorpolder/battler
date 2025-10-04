@@ -25,6 +25,7 @@ namespace Game.Scripts.Controllers.MatchmakingController
 			//Если это интернет бой - то прокинуть в network controller и ждать пока найдется матч,
 			//Если это ИИ бой - то взять данные и сгенерить "противника"
 
+			//создает из данных - персонажа
 			var data = new MatchmakingData()
 			{
 				RoomID = Guid.NewGuid().ToString(),

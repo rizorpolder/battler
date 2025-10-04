@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Game.Scripts.Configs
 {
-	[CreateAssetMenu(menuName = "Game/Configs/CoreConfig", fileName = "CoreConfig")]
+	[CreateAssetMenu(menuName = "Game/Configs/Core Config", fileName = "CoreConfig")]
 	public class CoreConfig : ScriptableObject
 	{
 		[SerializeField] public int PlayerWaitingInterval = 30;

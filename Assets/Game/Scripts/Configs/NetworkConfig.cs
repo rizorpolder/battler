@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Game.Scripts.Configs
 {
-	[CreateAssetMenu(menuName = "Configs/Network/NetworkConfig", fileName = "NetworkConfig")]
+	[CreateAssetMenu(menuName = "Configs/Network/Network Config", fileName = "NetworkConfig")]
 	public class NetworkConfig : ScriptableObject
 	{
 		[SerializeField] private List<NetworkPath> networks;

@@ -9,31 +9,31 @@ using VContainer.Unity;
 
 namespace Game.Scripts.Controllers
 {
-	public class UnitController : IUnitData, IUnitListener, IUnitCommand
+	public class UnitController //: IUnitData, IUnitListener, IUnitCommand
 	{
-		private PlayerUnitModel _playerUnitModel;
-		
-		private UnitModelFactory _unitModelFactory;
-
-		private List<UnitAction> _unitActions;
-		public List<UnitAction> UnitActions => _unitActions;
-		
-		[Inject]
-		public void Initialize(IDataSaverCommand dataSaverCommand, UnitModelFactory unitModelFactory)
-		{
-			_unitModelFactory = unitModelFactory;
-
-			if (!dataSaverCommand.TryLoadData(SaveDataType.Unit, out UnitData data))
-			{
-				data = UnitData.Default;
-			}
-
-			CreatePlayerUnitModel(data);
-		}
-
-		private void CreatePlayerUnitModel(UnitData data)
-		{
-			_playerUnitModel = _unitModelFactory.Build(data);
-		}
+		// private PlayerUnitModel _playerUnitModel;
+		//
+		// private UnitModelFactory _unitModelFactory;
+		//
+		// private List<UnitAction> _unitActions;
+		// public List<UnitAction> UnitActions => _unitActions;
+		//
+		// [Inject]
+		// public void Initialize(IDataSaverCommand dataSaverCommand, UnitModelFactory unitModelFactory)
+		// {
+		// 	_unitModelFactory = unitModelFactory;
+		//
+		// 	if (!dataSaverCommand.TryLoadData(SaveDataType.Unit, out UnitData data))
+		// 	{
+		// 		data = UnitData.Default;
+		// 	}
+		//
+		// 	CreatePlayerUnitModel(data);
+		// }
+		//
+		// private void CreatePlayerUnitModel(UnitData data)
+		// {
+		// 	_playerUnitModel = _unitModelFactory.Build(data);
+		// }
 	}
 }

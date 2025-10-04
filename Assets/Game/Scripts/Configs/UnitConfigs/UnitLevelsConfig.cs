@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Scripts.Configs
 {
-	[CreateAssetMenu(menuName = "Configs/Unit/UnitLevelsConfig", fileName = "UnitLevelsConfig")]
+	[CreateAssetMenu(menuName = "Configs/Unit/Unit Levels Config", fileName = "UnitLevelsConfig")]
 	public class UnitLevelsConfig : ScriptableObject
 	{
 		[SerializeField] public List<UnitLevelData> _unitLevels;

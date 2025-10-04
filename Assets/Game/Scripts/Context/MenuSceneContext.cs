@@ -13,7 +13,6 @@ namespace Game.Scripts.Context
 		{
 			builder.Register<StartScreenController>(Lifetime.Scoped).AsImplementedInterfaces();
 			builder.Register<InventoryController>(Lifetime.Scoped).AsImplementedInterfaces();
-			builder.Register<UnitModelFactory>(Lifetime.Singleton);
 			builder.Register<UnitController>(Lifetime.Scoped).AsImplementedInterfaces();
 		}
 	}

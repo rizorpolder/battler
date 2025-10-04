@@ -38,7 +38,7 @@ namespace Game.Scripts.Context
 
 			//Configs
 			builder.RegisterInstance(_configsRepository.networkConfig);
-			builder.RegisterInstance(_configsRepository.unitClassesConfig);
+			builder.RegisterInstance(_configsRepository.unitClassesRepository);
 			builder.RegisterInstance(_configsRepository.itemsConfig);
 			builder.RegisterInstance(_configsRepository.coreConfig);
 			builder.RegisterInstance(_configsRepository.unitLevelsConfig);

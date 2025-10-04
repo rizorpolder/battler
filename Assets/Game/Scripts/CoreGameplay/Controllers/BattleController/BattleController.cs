@@ -1,11 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using Game.Scripts.Controllers;
 using Game.Scripts.Controllers.MatchmakingController;
-using Game.Scripts.Data;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -18,8 +14,8 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		public event Action OnBattleLoaded;
 		public event Action OnTurnPointsSpend;
 		public event Action OnTurnPointsRestore;
-		public event Action<UnitAction> OnActionAdded;
-		public event Action<UnitAction> OnActionRemoved;
+		// public event Action<UnitAction> OnActionAdded;
+		// public event Action<UnitAction> OnActionRemoved;
 
 		[Inject] private IMatchmakingCommand _matchmakingCommand;
 		[Inject] private IMatchmakingData _matchmakingData;
@@ -28,7 +24,7 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		private int _maxTurnsCount;
 		private int _currentTurnsCount;
 
-		private List<UnitAction> playerActionsQueue;
+		//private List<UnitAction> playerActionsQueue;
 
 		public async UniTask StartAsync(CancellationToken cancellation = new CancellationToken())
 		{
@@ -36,32 +32,28 @@ namespace Game.Scripts.CoreGameplay.Controllers
 
 			await UniTask.Delay(TimeSpan.FromSeconds(4), cancellationToken: cancellation);
 
-			Debug.Log("Battle Controller loaded");
-		}
-
-		private void LoadBattleData()
-		{
-			//берем из MM даты данные про противника и комнаты.
 			OnBattleLoaded?.Invoke();
 			StartTurn();
+			
+			Debug.Log("Battle Controller loaded");
 		}
+		
+		// public void AddPlayerAction(UnitAction action)
+		// {
+		// 	if (_currentTurnsCount < action.ActionPrice)
+		// 		return;
+		//
+		// 	playerActionsQueue.Add(action);
+		// 	OnActionAdded?.Invoke(action);
+		// 	SpendTurnPoints(action.ActionPrice);
+		// }
 
-		public void AddPlayerAction(UnitAction action)
-		{
-			if (_currentTurnsCount < action.ActionPrice)
-				return;
-
-			playerActionsQueue.Add(action);
-			OnActionAdded?.Invoke(action);
-			SpendTurnPoints(action.ActionPrice);
-		}
-
-		public void RemovePlayerAction(UnitAction action)
-		{
-			playerActionsQueue.Remove(action);
-			OnActionRemoved?.Invoke(action);
-			AddTurnsPoints(action.ActionPrice);
-		}
+		// public void RemovePlayerAction(UnitAction action)
+		// {
+		// 	playerActionsQueue.Remove(action);
+		// 	OnActionRemoved?.Invoke(action);
+		// 	AddTurnsPoints(action.ActionPrice);
+		// }
 
 		private void AddTurnsPoints(int points)
 		{
@@ -117,8 +109,8 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		public event Action OnTurnPointsSpend;
 		public event Action OnTurnPointsRestore;
 
-		public event Action<UnitAction> OnActionAdded;
-		public event Action<UnitAction> OnActionRemoved;
+		// public event Action<UnitAction> OnActionAdded;
+		// public event Action<UnitAction> OnActionRemoved;
 	}
 
 	public interface IBattleControllerData
