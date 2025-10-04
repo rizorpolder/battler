@@ -26,6 +26,7 @@ namespace Game.Scripts.Context
 
 			builder.Register<ResourcesController>(Lifetime.Singleton).AsImplementedInterfaces();
 			builder.Register<MatchmakingController>(Lifetime.Singleton).AsImplementedInterfaces();
+			
 			//Save Data Service
 			builder.Register<JSONDataSerializer>(Lifetime.Scoped).As<IDataSerializer>();
 			builder.Register<PlayerPrefsDataSaver>(Lifetime.Singleton).As<IDataSaver>()

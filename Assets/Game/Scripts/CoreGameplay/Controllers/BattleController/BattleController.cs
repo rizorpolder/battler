@@ -1,12 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using Game.Scripts.Controllers;
 using Game.Scripts.Controllers.MatchmakingController;
 using Game.Scripts.Data;
+using UnityEngine;
 using VContainer;
+using VContainer.Unity;
 
 namespace Game.Scripts.CoreGameplay.Controllers
 {
-	public class BattleController : IBattleControllerListener, IBattleControllerCommand, IBattleControllerData
+	public class BattleController : IBattleControllerListener, IBattleControllerCommand, IBattleControllerData, IAsyncStartable
 	{
 		public event Action OnBattleLoaded;
 		public event Action OnTurnPointsSpend;
@@ -24,11 +30,11 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		private List<UnitAction> playerActionsQueue;
 
 		[Inject]
-		public BattleController(IObjectResolver objectResolver)
+		public BattleController(IObjectResolver resolver)
 		{
-			_matchmakingListener = objectResolver.Resolve<IMatchmakingListener>();
-			_matchmakingData = objectResolver.Resolve<IMatchmakingData>();
-			_matchmakingCommand = objectResolver.Resolve<IMatchmakingCommand>();
+			_matchmakingListener = resolver.Resolve<IMatchmakingListener>();
+			_matchmakingData = resolver.Resolve<IMatchmakingData>();
+			_matchmakingCommand = resolver.Resolve<IMatchmakingCommand>();
 		}
 
 		private void LoadBattleData()
@@ -93,6 +99,16 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		{
 			IncreaseMaxTurnPoints(1);
 			AddTurnsPoints(1);
+		}
+		
+		public async UniTask StartAsync(CancellationToken cancellation = new CancellationToken())
+		{
+			Debug.Log("Starting Battle Controller");
+			
+			await UniTask.Delay(TimeSpan.FromSeconds(4), cancellationToken: cancellation);
+			
+			Debug.Log("Battle Controller loaded");
+			
 		}
 	}
 

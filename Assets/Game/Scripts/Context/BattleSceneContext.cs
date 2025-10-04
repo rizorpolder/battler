@@ -1,6 +1,7 @@
 using Game.Scripts.Context.Abstract;
 using Game.Scripts.CoreGameplay.Controllers;
 using VContainer;
+using VContainer.Unity;
 
 namespace Game.Scripts.Context
 {
@@ -8,7 +9,10 @@ namespace Game.Scripts.Context
 	{
 		protected override void Configure(IContainerBuilder builder)
 		{
-			builder.Register<BattleController>(Lifetime.Singleton).AsImplementedInterfaces().WithParameter(builder);
+			builder.RegisterEntryPoint<BattleController>();
+			
+			//builder.Register<BattleController>(Lifetime.Singleton).AsImplementedInterfaces();
+
 		}
 	}
 }

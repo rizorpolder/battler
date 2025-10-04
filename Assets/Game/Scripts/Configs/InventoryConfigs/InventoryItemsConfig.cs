@@ -10,7 +10,7 @@ namespace Game.Scripts.Configs.InventoryConfigs
 	[CreateAssetMenu(menuName = "Configs/Inventory/InventoryItemsConfig", fileName = "InventoryItemsConfig")]
 	public class InventoryItemsConfig : ScriptableObject
 	{
-		//TODO переделать потом в AssetReferences (чтоб заполнялось по загрузке бандла)
+		//TODO переделать потом в AssetReferences (чтоб заполнялось по загрузке бандла), сделать компоновщик
 		//TODO Формировать конфиг в рантайме 
 		[SerializeField] private List<InventoryItemWrapper> _inventoryItems;
 

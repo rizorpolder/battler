@@ -9,18 +9,15 @@ using VContainer.Unity;
 
 namespace Game.Scripts.Controllers
 {
-	public class UnitController : IUnitData, IUnitListener, IUnitCommand, IInitializable
+	public class UnitController : IUnitData, IUnitListener, IUnitCommand
 	{
 		private PlayerUnitModel _playerUnitModel;
+		
 		private UnitModelFactory _unitModelFactory;
 
 		private List<UnitAction> _unitActions;
 		public List<UnitAction> UnitActions => _unitActions;
-
-		public void Initialize()
-		{
-		}
-
+		
 		[Inject]
 		public void Initialize(IDataSaverCommand dataSaverCommand, UnitModelFactory unitModelFactory)
 		{
