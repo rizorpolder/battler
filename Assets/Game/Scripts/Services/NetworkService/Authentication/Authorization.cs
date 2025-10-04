@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using NetworkService.Authentication.Credentials;
@@ -9,6 +10,8 @@ namespace NetworkService.Authentication
 	{
 		private const string TokenKey = "auth_token";
 		private const string CredentialKey = "credential";
+
+		private const int ReTryAuthTimeOut = 1000; // in mc
 
 		private bool _needSyncData = false;
 
@@ -49,6 +52,31 @@ namespace NetworkService.Authentication
 					await OnSuccessAuth();
 				}
 			}
+			else
+			{
+				var authToken = await Login(credential);
+				token?.Token.ThrowIfCancellationRequested();
+				if (string.IsNullOrEmpty(authToken))
+				{
+					await TryAgainLoadUser();
+				}
+				else
+				{
+					PlayerPrefs.SetString(TokenKey, authToken);
+					PlayerPrefs.SetString(CredentialKey, credential.GetActualString());
+					await LoadUser();
+				}
+			}
+		}
+
+		private async UniTask TryAgainLoadUser()
+		{
+			await UniTask.Delay(ReTryAuthTimeOut);
+
+			var loadUserToken = new CancellationTokenSource();
+			loadUserToken.CancelAfter(TimeSpan.FromMilliseconds(10000));
+			var loadUserTask = LoadUser(loadUserToken);
+			await UniTask.WhenAny(loadUserTask, UniTask.Delay(10000));
 		}
 
 		private void ResetToken()
