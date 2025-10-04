@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Punch
   m_EditorClassIdentifier: 
   _id: Punch
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 0d3b8c9ee4c64eb4b9f2756f69be8f35, type: 3}
   _minBaseDamage: 5
   _maxBaseDamage: 10
   _isMagic: 0
-  _scaleStat: 1
+  _scalingStat: 1
   scalingFactor: 1
   _effects:
   - {fileID: 11400000, guid: c1b0a2897b0d5924c9749cc43a153339, type: 2}

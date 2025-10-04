@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Game.Scripts.Controllers.MatchmakingController;
+using Game.Scripts.CoreGameplay.Data;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -14,8 +16,8 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		public event Action OnBattleLoaded;
 		public event Action OnTurnPointsSpend;
 		public event Action OnTurnPointsRestore;
-		// public event Action<UnitAction> OnActionAdded;
-		// public event Action<UnitAction> OnActionRemoved;
+		public event Action<AbilityData> OnActionAdded;
+		public event Action<AbilityData> OnActionRemoved;
 
 		[Inject] private IMatchmakingCommand _matchmakingCommand;
 		[Inject] private IMatchmakingData _matchmakingData;
@@ -24,7 +26,7 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		private int _maxTurnsCount;
 		private int _currentTurnsCount;
 
-		//private List<UnitAction> playerActionsQueue;
+		private List<AbilityData> playerActionsQueue;
 
 		public async UniTask StartAsync(CancellationToken cancellation = new CancellationToken())
 		{
@@ -34,26 +36,20 @@ namespace Game.Scripts.CoreGameplay.Controllers
 
 			OnBattleLoaded?.Invoke();
 			StartTurn();
-			
+
 			Debug.Log("Battle Controller loaded");
 		}
-		
-		// public void AddPlayerAction(UnitAction action)
-		// {
-		// 	if (_currentTurnsCount < action.ActionPrice)
-		// 		return;
-		//
-		// 	playerActionsQueue.Add(action);
-		// 	OnActionAdded?.Invoke(action);
-		// 	SpendTurnPoints(action.ActionPrice);
-		// }
 
-		// public void RemovePlayerAction(UnitAction action)
-		// {
-		// 	playerActionsQueue.Remove(action);
-		// 	OnActionRemoved?.Invoke(action);
-		// 	AddTurnsPoints(action.ActionPrice);
-		// }
+		public void AddPlayerAction(AbilityData action)
+		{
+			OnActionAdded?.Invoke(action);
+		}
+
+		public void RemovePlayerAction(AbilityData action)
+		{
+			playerActionsQueue.Remove(action);
+			OnActionRemoved?.Invoke(action);
+		}
 
 		private void AddTurnsPoints(int points)
 		{
@@ -94,26 +90,5 @@ namespace Game.Scripts.CoreGameplay.Controllers
 			IncreaseMaxTurnPoints(1);
 			AddTurnsPoints(1);
 		}
-	}
-
-	public interface IBattleControllerCommand
-	{
-		public void StartTurn();
-		public void MarkAsReady();
-		public void EndOfTurn();
-	}
-
-	public interface IBattleControllerListener
-	{
-		public event Action OnBattleLoaded;
-		public event Action OnTurnPointsSpend;
-		public event Action OnTurnPointsRestore;
-
-		// public event Action<UnitAction> OnActionAdded;
-		// public event Action<UnitAction> OnActionRemoved;
-	}
-
-	public interface IBattleControllerData
-	{
 	}
 }

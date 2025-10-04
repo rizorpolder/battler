@@ -21,4 +21,5 @@ MonoBehaviour:
   baseArmor: 0
   maxHealth: 0
   equippedItems: []
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: 0507f9d5793f9614ab8ca5ecbf04abbe, type: 2}

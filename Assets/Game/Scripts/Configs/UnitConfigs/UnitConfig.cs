@@ -6,11 +6,9 @@ using UnityEngine;
 
 namespace Game.Scripts.Configs
 {
-	[CreateAssetMenu(menuName = "Configs/Unit/Unit Config",fileName = "UnitConfig")]
+	[CreateAssetMenu(menuName = "Configs/Unit/Unit Config", fileName = "UnitConfig")]
 	public class UnitConfig : ScriptableObject
 	{
-		//TODO нужно развести для AI и базового функционала
-		
 		[SerializeField] private UnitStatsConfig statsConfig;
 
 		[SerializeField] private int baseStrength;
@@ -37,7 +35,8 @@ namespace Game.Scripts.Configs
 				MinDamage = baseMinDamage,
 				MaxDamage = baseMaxDamage,
 				Armor = baseArmor,
-				MaxHealth = maxHealth
+				MaxHealth = maxHealth,
+				CharacterClass = statsConfig.GetClassData(),
 			};
 
 			foreach (var itemSO in equippedItems)
@@ -49,6 +48,7 @@ namespace Game.Scripts.Configs
 			{
 				data.Abilities.Add(abilitySO.GetAbilityData());
 			}
+
 
 			return data;
 		}

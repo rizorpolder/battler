@@ -1,5 +1,6 @@
 using Game.Scripts.Context.Abstract;
 using Game.Scripts.CoreGameplay.Controllers;
+using Game.Scripts.Helpers;
 using VContainer;
 using VContainer.Unity;
 
@@ -10,6 +11,7 @@ namespace Game.Scripts.Context
 		protected override void Configure(IContainerBuilder builder)
 		{
 			builder.RegisterEntryPoint<BattleController>().As<IBattleControllerListener, IBattleControllerCommand, IBattleControllerData>();
+			builder.Register<CharacterFactory>(Lifetime.Singleton);
 		}
 	}
 }

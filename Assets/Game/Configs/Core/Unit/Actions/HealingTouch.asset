@@ -9,16 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b4ea4ae944b4f8b97a3d03f5cd83129, type: 3}
-  m_Name: Bleed
+  m_Script: {fileID: 11500000, guid: 415e52bccc7c46eda8f6233cf9a91880, type: 3}
+  m_Name: HealingTouch
   m_EditorClassIdentifier: 
-  _id: Bleed
-  type: 1
-  targetStat: 3
-  value: 10
-  duration: 2
-  isStackable: 0
-  blockMagicDamage: 0
-  blockPhysicalDamage: 0
-  scalingStat: 0
+  _id: HealingTouch
+  _icon: {fileID: 0}
+  _minBaseDamage: -5
+  _maxBaseDamage: -10
+  _isMagic: 1
+  _scalingStat: 3
   scalingFactor: 0
+  _effects:
+  - {fileID: 11400000, guid: 2b7610cf7dc79e94a9407816fedcf178, type: 2}
