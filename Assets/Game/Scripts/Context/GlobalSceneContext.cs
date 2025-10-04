@@ -42,11 +42,12 @@ namespace Game.Scripts.Context
 			builder.RegisterInstance(_configsRepository.itemsConfig);
 			builder.RegisterInstance(_configsRepository.coreConfig);
 			builder.RegisterInstance(_configsRepository.unitLevelsConfig);
+
+			builder.RegisterEntryPoint<InitialScreen>();
 			
 			builder.RegisterBuildCallback(resolver =>
 			{
-				var sceneLoader = resolver.Resolve<ISceneCommand>();
-				sceneLoader.LoadScene(SceneNames.Menu);
+				
 			});
 		}
 	}

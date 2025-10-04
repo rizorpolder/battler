@@ -7,7 +7,7 @@ using VContainer;
 
 namespace Game.Scripts.Context
 {
-	public class StartSceneContext : ASceneContext
+	public class MenuSceneContext : ASceneContext
 	{
 		protected override void Configure(IContainerBuilder builder)
 		{
