@@ -38,6 +38,9 @@ namespace Game.Scripts.CoreGameplay.Views
 				? _battleControllerData.PlayerData
 				: _battleControllerData.EnemyData;
 
+			if (_unitControl != TUnitControl.Player)
+				return;
+
 			UpdateActions();
 		}
 

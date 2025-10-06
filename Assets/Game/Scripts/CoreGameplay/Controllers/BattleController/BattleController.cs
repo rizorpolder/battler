@@ -29,6 +29,7 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		public List<AbilityData> AbilitiesQueue => _playerActionsQueue;
 
 		public int TurnPoints => 10;
+
 		public CharacterData PlayerData => _playerData;
 		public CharacterData EnemyData => _enemyData;
 

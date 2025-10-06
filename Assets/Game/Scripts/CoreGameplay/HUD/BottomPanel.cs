@@ -31,13 +31,22 @@ namespace Game.Scripts.CoreGameplay.HUD
 
 		private void UpdateViews()
 		{
+			UnsubscribeEvents();
 			_pool.ResetPool();
 
 			foreach (var abilityData in _battleControllerData.AbilitiesQueue)
 			{
 				var item = _pool.GetItem();
 				item.Initialize(abilityData);
-				item.OnButtonClicked += OnAbilityClickHandler; //todo отписка
+				item.OnButtonClicked += OnAbilityClickHandler;
+			}
+		}
+
+		private void UnsubscribeEvents()
+		{
+			foreach (var view in _pool.GetActiveItems())
+			{
+				view.OnButtonClicked -= OnAbilityClickHandler;
 			}
 		}
 
@@ -54,7 +63,6 @@ namespace Game.Scripts.CoreGameplay.HUD
 		private void OnDestroy()
 		{
 			_battleControllerListener.OnAbilitiesQueueChanged += OnAbilitiesChangedHandler;
-
 		}
 	}
 }

@@ -7,7 +7,7 @@ using VContainer;
 
 namespace Game.Scripts.Helpers
 {
-	public class UnitFactory
+	public class CharacterFactory
 	{
 		[Inject] private UnitClassesRepository _unitClassesRepository;
 

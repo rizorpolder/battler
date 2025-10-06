@@ -11,7 +11,7 @@ namespace Game.Scripts.Context
 		protected override void Configure(IContainerBuilder builder)
 		{
 			builder.RegisterEntryPoint<BattleController>().As<IBattleControllerListener, IBattleControllerCommand, IBattleControllerData>();
-			builder.Register<UnitFactory>(Lifetime.Singleton);
+			builder.Register<CharacterFactory>(Lifetime.Singleton);
 		}
 	}
 }

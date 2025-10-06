@@ -66,7 +66,12 @@ namespace Game.Scripts.Common
 				return item;
 			}
 
-			public List<T> GetActiveItems()
+			public List<T> GetActiveItemsList()
+			{
+				return _items;
+			}
+
+			public IEnumerable<T> GetActiveItems()
 			{
 				return _items;
 			}
