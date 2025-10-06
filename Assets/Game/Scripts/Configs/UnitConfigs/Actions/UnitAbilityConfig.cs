@@ -20,7 +20,7 @@ namespace Game.Scripts.Configs.UnitConfigs
 
 		public AbilityData GetAbilityData()
 		{
-			var result = new AbilityData()
+			var result = new AbilityData
 			{
 				Id = _id,
 				Icon = _icon,
@@ -29,8 +29,8 @@ namespace Game.Scripts.Configs.UnitConfigs
 				IsMagic = _isMagic,
 				ScalingStat = _scalingStat,
 				ScalingFactor = scalingFactor,
+				Effects = new List<AbilityEffectData>()
 			};
-
 			foreach (var effect in _effects)
 			{
 				result.Effects.Add(effect.GetEffectData());

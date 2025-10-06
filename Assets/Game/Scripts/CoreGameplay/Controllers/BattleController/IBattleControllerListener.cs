@@ -9,6 +9,6 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		public event Action OnTurnPointsSpend;
 		public event Action OnTurnPointsRestore;
 
-		public event Action OnAbilitiesChanged;
+		public event Action OnAbilitiesQueueChanged;
 	}
 }

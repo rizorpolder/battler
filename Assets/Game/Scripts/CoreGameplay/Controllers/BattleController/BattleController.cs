@@ -18,7 +18,7 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		public event Action OnBattleLoaded;
 		public event Action OnTurnPointsSpend;
 		public event Action OnTurnPointsRestore;
-		public event Action OnAbilitiesChanged;
+		public event Action OnAbilitiesQueueChanged;
 
 		#endregion
 
@@ -60,13 +60,13 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		public void AddPlayerAction(AbilityData action)
 		{
 			_playerActionsQueue.Add(action);
-			OnAbilitiesChanged?.Invoke();
+			OnAbilitiesQueueChanged?.Invoke();
 		}
 
 		public void RemovePlayerAction(AbilityData action)
 		{
 			_playerActionsQueue.Remove(action);
-			OnAbilitiesChanged?.Invoke();
+			OnAbilitiesQueueChanged?.Invoke();
 		}
 
 		private void AddTurnsPoints(int points)
@@ -106,10 +106,13 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		public void AddAbilityToQueue(AbilityData data)
 		{
 			_playerActionsQueue.Add(data);
+			OnAbilitiesQueueChanged?.Invoke();
 		}
 
 		public void RemoveAbilityFromQueue(AbilityData data)
 		{
+			_playerActionsQueue.Remove(data);
+			OnAbilitiesQueueChanged?.Invoke();
 		}
 
 		public void StartTurn()

@@ -1,9 +1,7 @@
-using System.Collections.Generic;
 using Game.Scripts.Common;
 using Game.Scripts.Common.Flappy_Bird.Scripts.Common;
 using Game.Scripts.CoreGameplay.Controllers;
 using Game.Scripts.CoreGameplay.Data;
-using Game.Scripts.Services.SaveDataService;
 using UnityEngine;
 using VContainer;
 
@@ -14,19 +12,17 @@ namespace Game.Scripts.CoreGameplay.HUD
 		[SerializeField] private Transform _parent;
 		[SerializeField] private BottomIconView _prefab;
 
-		//пусть контейнер каждый раз возвращает новое значение.
-		[Inject] IBattleControllerListener _battleControllerListener;
-		[Inject] IBattleControllerCommand _battleControllerCommand;
-		[Inject] IBattleControllerData _battleControllerData;
-
-		[Inject] private IObjectResolver _resolver;
+		[Inject] private IBattleControllerCommand _battleControllerCommand;
+		[Inject] private IBattleControllerData _battleControllerData;
+		[Inject] private IBattleControllerListener _battleControllerListener;
 		[Inject] private ObjectsPoolFactory _poolFactory;
+		[Inject] private IObjectResolver _resolver;
 
 		private ObjectsPool<BottomIconView> _pool;
 
 		private void Start()
 		{
-			_battleControllerListener.OnAbilitiesChanged += OnAbilitiesChangedHandler;
+			_battleControllerListener.OnAbilitiesQueueChanged += OnAbilitiesChangedHandler;
 			_pool = _poolFactory.CreatePool(_parent, _prefab);
 			_pool.InitializePool();
 
@@ -35,19 +31,30 @@ namespace Game.Scripts.CoreGameplay.HUD
 
 		private void UpdateViews()
 		{
+			_pool.ResetPool();
+
 			foreach (var abilityData in _battleControllerData.AbilitiesQueue)
 			{
 				var item = _pool.GetItem();
-				item.Initialize(abilityData.Icon);
+				item.Initialize(abilityData);
+				item.OnButtonClicked += OnAbilityClickHandler; //todo отписка
 			}
+		}
+
+		private void OnAbilityClickHandler(AbilityData data)
+		{
+			_battleControllerCommand.RemoveAbilityFromQueue(data);
 		}
 
 		private void OnAbilitiesChangedHandler()
 		{
+			UpdateViews();
 		}
 
-		private void OnActinAdded(AbilityData data)
+		private void OnDestroy()
 		{
+			_battleControllerListener.OnAbilitiesQueueChanged += OnAbilitiesChangedHandler;
+
 		}
 	}
 }

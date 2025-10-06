@@ -1,23 +1,18 @@
 using System;
-using Game.Scripts.CoreGameplay.Controllers;
+using Game.Scripts.CoreGameplay.Data;
 using UnityEngine;
 using UnityEngine.UI;
-using VContainer;
 
 namespace Game.Scripts.CoreGameplay.HUD
 {
 	public class BottomIconView : MonoBehaviour
 	{
-		public event Action<int> OnButtonClicked = i => { };
+		public event Action<AbilityData> OnButtonClicked = i => { };
 
 		[SerializeField] private Image _icon;
 		[SerializeField] private Button _button;
 
-
-		[Inject] IBattleControllerCommand _battleControllerCommand;
-		
-		
-		private int _index = 0;
+		AbilityData _abilityData;
 
 		private void Start()
 		{
@@ -26,13 +21,13 @@ namespace Game.Scripts.CoreGameplay.HUD
 
 		private void OnButtonClickHandler()
 		{
-			//_battleControllerCommand.AddAbilityToQueue();
+			OnButtonClicked.Invoke(_abilityData);
 		}
 
-		public void Initialize( Sprite dataIcon)
+		public void Initialize(AbilityData abilityData)
 		{
-			_index = 0;
-			_icon.sprite = dataIcon;
+			_abilityData = abilityData;
+			_icon.sprite = _abilityData.Icon;
 		}
 	}
 }
