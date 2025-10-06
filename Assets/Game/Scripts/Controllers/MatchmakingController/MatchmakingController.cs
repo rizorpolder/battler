@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Game.Scripts.CoreGameplay.Data;
 using Game.Scripts.Data;
 using Game.Scripts.LoadingService;
@@ -11,11 +12,8 @@ namespace Game.Scripts.Controllers.MatchmakingController
 {
 	public class MatchmakingController : IMatchmakingListener, IMatchmakingData, IMatchmakingCommand
 	{
-		private CharacterData _player;
-		private CharacterData _opponent;
-
-		public CharacterData PlayerData => _player;
-		public CharacterData OpponentData => _opponent;
+		private List<CharacterBattleData> _characterBattleData;
+		public List<CharacterBattleData> CharacterBattleData => _characterBattleData;
 
 		private ISceneCommand _sceneCommand;
 
@@ -26,6 +24,7 @@ namespace Game.Scripts.Controllers.MatchmakingController
 		public MatchmakingController(ISceneCommand sceneCommand) //прокинуть сюда network controller
 		{
 			_sceneCommand = sceneCommand;
+			_characterBattleData = new List<CharacterBattleData>();
 		}
 
 		public void FindMatchmaking()
@@ -54,8 +53,20 @@ namespace Game.Scripts.Controllers.MatchmakingController
 
 		private void OnMatchmakingFound(MatchmakingData matchmakingData)
 		{
-			_player = _repository.configs[0].GetCharacterData();
-			_opponent = _repository.configs[1].GetCharacterData();
+			//TODO Its test logic
+			bool isPlayer = true;
+			foreach (var repositoryConfig in _repository.configs)
+			{
+				_characterBattleData.Add(new CharacterBattleData()
+				{
+					IsPlayer = isPlayer,
+					PlayerData = repositoryConfig.GetCharacterData()
+				});
+				isPlayer = false;
+			}
+
+			
+			//callback
 			_sceneCommand.LoadScene(SceneNames.Battle);
 		}
 	}

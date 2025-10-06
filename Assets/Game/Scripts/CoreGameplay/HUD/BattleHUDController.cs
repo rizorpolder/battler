@@ -1,5 +1,4 @@
 using System;
-using Game.Scripts.CoreGameplay.Controllers;
 using Game.Scripts.Data;
 using Game.Scripts.LoadingService;
 using UnityEngine;
@@ -13,18 +12,12 @@ namespace Game.Scripts.CoreGameplay.HUD
 		[SerializeField] private Button _readyButton;
 		[SerializeField] private Button _endOfTurnButton;
 		[SerializeField] private Button _leaveButton;
-
-		[Inject] IBattleControllerCommand _battleControllerCommand;
-		[Inject] IBattleControllerListener _battleControllerListener;
-
+		
 		[Inject] ISceneCommand _sceneCommand;
 
 		private void Start()
 		{
-			_readyButton.onClick.AddListener(OnButtonClickHandled);
-			_endOfTurnButton.onClick.AddListener(EndOfTurnHandler);
 			_leaveButton.onClick.AddListener(LeaveGameHandler);
-			//_gameControllerListener.OnPlayerReady += OnPlayerReadyHandler;
 		}
 
 		private void LeaveGameHandler()
@@ -32,27 +25,8 @@ namespace Game.Scripts.CoreGameplay.HUD
 			_sceneCommand.LoadScene(SceneNames.Menu);
 		}
 
-		private void OnPlayerReadyHandler(bool obj)
-		{
-			_readyButton.image.color = obj ? Color.green : Color.white;
-		}
-
-		private void EndOfTurnHandler()
-		{
-			_battleControllerCommand.EndOfTurn();
-		}
-
-		private void OnButtonClickHandled()
-		{
-			_battleControllerCommand.MarkAsReady();
-		}
-
 		public void Dispose()
 		{
-			//_battleControllerCommand.OnPlayerReady -= OnPlayerReadyHandler;
-
-			_readyButton.onClick.RemoveListener(OnButtonClickHandled);
-			_endOfTurnButton.onClick.RemoveListener(EndOfTurnHandler);
 			_leaveButton.onClick.RemoveListener(LeaveGameHandler);
 		}
 	}

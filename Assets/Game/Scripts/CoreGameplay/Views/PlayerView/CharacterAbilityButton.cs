@@ -1,4 +1,5 @@
 using System;
+using Game.Scripts.CoreGameplay.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,12 +7,12 @@ namespace Game.Scripts.CoreGameplay.Views
 {
 	public class CharacterAbilityButton : MonoBehaviour
 	{
-		public Action<int> OnButtonClicked;
+		public Action<AbilityData> OnButtonClicked;
 
 		[SerializeField] private Button _button;
-		[SerializeField] private Sprite _sprite;
+		[SerializeField] private Image _image;
 
-		private int _index = 0; //change to action
+		private AbilityData _abilityData;
 
 		private void Start()
 		{
@@ -20,12 +21,13 @@ namespace Game.Scripts.CoreGameplay.Views
 
 		private void OnButtonClickHandler()
 		{
-			OnButtonClicked?.Invoke(_index);
+			OnButtonClicked?.Invoke(_abilityData);
 		}
 
-		public void Initialize(int index) //todo change to action
+		public void Initialize(AbilityData abilityData)
 		{
-			_index = index;
+			_abilityData = abilityData;
+			_image.sprite = abilityData.Icon;
 		}
 	}
 }

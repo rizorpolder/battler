@@ -1,3 +1,5 @@
+using Game.Scripts.Common;
+using Game.Scripts.Common.Flappy_Bird.Scripts.Common;
 using Game.Scripts.Configs;
 using Game.Scripts.Controllers.MatchmakingController;
 using Game.Scripts.Controllers.Resources;
@@ -7,6 +9,7 @@ using Game.Scripts.Services.NetworkService;
 using Game.Scripts.Services.SaveDataService;
 using Game.Scripts.Services.SaveDataService.DataSerializer;
 using UnityEngine;
+using UnityEngine.Pool;
 using VContainer;
 using VContainer.Unity;
 
@@ -20,8 +23,8 @@ namespace Game.Scripts.Context
 		protected override void Configure(IContainerBuilder builder)
 		{
 			DontDestroyOnLoad(this);
-			
-			
+
+
 			//Network
 			builder.RegisterComponent(_wsController).AsImplementedInterfaces();
 
@@ -35,6 +38,10 @@ namespace Game.Scripts.Context
 				.WithParameter(new JSONDataSerializer());
 			builder.Register<SaveDataService>(Lifetime.Singleton).As<IDataSaverCommand>();
 
+			//Pool
+			//builder.Register(typeof(ObjectsPool<>), Lifetime.Singleton);
+
+			builder.Register<ObjectsPoolFactory>(Lifetime.Singleton);
 
 			//Configs
 			builder.RegisterInstance(_configsRepository.networkConfig);
@@ -45,11 +52,8 @@ namespace Game.Scripts.Context
 			builder.RegisterInstance(_configsRepository.charactersRepository);
 
 			builder.RegisterEntryPoint<InitialScreen>();
-			
-			builder.RegisterBuildCallback(resolver =>
-			{
-				
-			});
+
+			builder.RegisterBuildCallback(resolver => { });
 		}
 	}
 }

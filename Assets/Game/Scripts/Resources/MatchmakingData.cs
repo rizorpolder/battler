@@ -8,9 +8,7 @@ namespace Game.Scripts.Resources
 	public class MatchmakingData
 	{
 		public string RoomID;
-		
 		public UnitData EnemyData;
 		public UnitData PlayerData;
-		
 	}
 }

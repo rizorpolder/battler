@@ -1,9 +1,10 @@
+using Game.Scripts.CoreGameplay.Data;
+
 namespace Game.Scripts.CoreGameplay.Controllers
 {
 	public interface IBattleControllerCommand
 	{
-		public void StartTurn();
-		public void MarkAsReady();
-		public void EndOfTurn();
+		public void AddAbilityToQueue(AbilityData data);
+		public void RemoveAbilityFromQueue(AbilityData data);
 	}
 }

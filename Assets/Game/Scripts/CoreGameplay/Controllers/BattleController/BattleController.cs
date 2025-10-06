@@ -13,11 +13,24 @@ namespace Game.Scripts.CoreGameplay.Controllers
 	public class BattleController : IBattleControllerListener, IBattleControllerCommand, IBattleControllerData,
 		IAsyncStartable
 	{
+		#region IBattleControllerListener implementation
+
 		public event Action OnBattleLoaded;
 		public event Action OnTurnPointsSpend;
 		public event Action OnTurnPointsRestore;
-		public event Action<AbilityData> OnActionAdded;
-		public event Action<AbilityData> OnActionRemoved;
+		public event Action OnAbilitiesChanged;
+
+		#endregion
+
+		private CharacterData _playerData;
+		private CharacterData _enemyData;
+
+		private List<AbilityData> _playerActionsQueue;
+		public List<AbilityData> AbilitiesQueue => _playerActionsQueue;
+
+		public int TurnPoints => 10;
+		public CharacterData PlayerData => _playerData;
+		public CharacterData EnemyData => _enemyData;
 
 		[Inject] private IMatchmakingCommand _matchmakingCommand;
 		[Inject] private IMatchmakingData _matchmakingData;
@@ -26,11 +39,15 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		private int _maxTurnsCount;
 		private int _currentTurnsCount;
 
-		private List<AbilityData> playerActionsQueue;
-
 		public async UniTask StartAsync(CancellationToken cancellation = new CancellationToken())
 		{
+			_playerActionsQueue = new List<AbilityData>();
 			Debug.Log("Starting Battle Controller");
+
+			//Todo factory, convert from data to stats;
+
+			_playerData = _matchmakingData.CharacterBattleData[0].PlayerData;
+			_enemyData = _matchmakingData.CharacterBattleData[0].PlayerData;
 
 			await UniTask.Delay(TimeSpan.FromSeconds(4), cancellationToken: cancellation);
 
@@ -42,13 +59,14 @@ namespace Game.Scripts.CoreGameplay.Controllers
 
 		public void AddPlayerAction(AbilityData action)
 		{
-			OnActionAdded?.Invoke(action);
+			_playerActionsQueue.Add(action);
+			OnAbilitiesChanged?.Invoke();
 		}
 
 		public void RemovePlayerAction(AbilityData action)
 		{
-			playerActionsQueue.Remove(action);
-			OnActionRemoved?.Invoke(action);
+			_playerActionsQueue.Remove(action);
+			OnAbilitiesChanged?.Invoke();
 		}
 
 		private void AddTurnsPoints(int points)
@@ -83,6 +101,15 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		public void EndOfTurn()
 		{
 			_matchmakingCommand.PlayerEndTurn();
+		}
+
+		public void AddAbilityToQueue(AbilityData data)
+		{
+			_playerActionsQueue.Add(data);
+		}
+
+		public void RemoveAbilityFromQueue(AbilityData data)
+		{
 		}
 
 		public void StartTurn()
