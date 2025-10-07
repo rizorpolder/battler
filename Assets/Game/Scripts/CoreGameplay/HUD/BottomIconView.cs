@@ -29,5 +29,10 @@ namespace Game.Scripts.CoreGameplay.HUD
 			_abilityData = abilityData;
 			_icon.sprite = _abilityData.Icon;
 		}
+
+		public void SetInteractable(bool active)
+		{
+			_button.interactable = active;
+		}
 	}
 }

@@ -29,5 +29,10 @@ namespace Game.Scripts.CoreGameplay.Views
 			_abilityData = abilityData;
 			_image.sprite = abilityData.Icon;
 		}
+
+		public void SetInteractable(bool interactable)
+		{
+			_button.interactable = interactable;
+		}
 	}
 }

@@ -6,9 +6,8 @@ namespace Game.Scripts.CoreGameplay.Controllers
 	public interface IBattleControllerListener
 	{
 		public event Action OnBattleLoaded;
-		public event Action OnTurnPointsSpend;
-		public event Action OnTurnPointsRestore;
-
+		public event Action OnTurnPointsChanged;
+		
 		public event Action OnAbilitiesQueueChanged;
 	}
 }

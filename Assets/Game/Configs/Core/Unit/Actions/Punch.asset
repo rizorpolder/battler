@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Punch
   m_EditorClassIdentifier: 
   _id: Punch
+  _price: 1
   _icon: {fileID: 21300000, guid: 0d3b8c9ee4c64eb4b9f2756f69be8f35, type: 3}
   _minBaseDamage: 5
   _maxBaseDamage: 10

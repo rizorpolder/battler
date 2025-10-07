@@ -62,7 +62,7 @@ namespace Game.Scripts.CoreGameplay.HUD
 
 		private void OnDestroy()
 		{
-			_battleControllerListener.OnAbilitiesQueueChanged += OnAbilitiesChangedHandler;
+			_battleControllerListener.OnAbilitiesQueueChanged -= OnAbilitiesChangedHandler;
 		}
 	}
 }

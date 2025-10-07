@@ -4,10 +4,11 @@ using UnityEngine;
 
 namespace Game.Scripts.Configs.UnitConfigs
 {
-	[CreateAssetMenu(menuName = "Configs/Abilities/Unit Ability Config",fileName = "AbilityConfig")]
+	[CreateAssetMenu(menuName = "Configs/Abilities/Unit Ability Config", fileName = "AbilityConfig")]
 	public class UnitAbilityConfig : ScriptableObject
 	{
 		[SerializeField] private string _id;
+		[SerializeField] private int _price;
 		[SerializeField] private Sprite _icon;
 		[SerializeField] private int _minBaseDamage;
 		[SerializeField] private int _maxBaseDamage;
@@ -23,6 +24,7 @@ namespace Game.Scripts.Configs.UnitConfigs
 			var result = new AbilityData
 			{
 				Id = _id,
+				Price = _price,
 				Icon = _icon,
 				MinBaseDamage = _minBaseDamage,
 				MaxBaseDamage = _maxBaseDamage,

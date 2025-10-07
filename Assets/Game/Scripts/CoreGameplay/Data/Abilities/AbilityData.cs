@@ -7,6 +7,7 @@ namespace Game.Scripts.CoreGameplay.Data
 	public class AbilityData
 	{
 		public string Id;
+		public int Price;
 		public Sprite Icon;
 		public int MinBaseDamage;
 		public int MaxBaseDamage;

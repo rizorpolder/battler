@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4853655958958256829}
   - component: {fileID: 8171986636492226032}
   m_Layer: 0
-  m_Name: SkillButtonPrefab
+  m_Name: CharacterSkillPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

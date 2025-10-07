@@ -7,7 +7,7 @@ namespace Game.Scripts.CoreGameplay.Controllers
 	{
 		public List<AbilityData> AbilitiesQueue { get; }
 
-		public int TurnPoints { get; }
+		public int CurrentTurnPoints { get; }
 		public CharacterData PlayerData { get; }
 		public CharacterData EnemyData { get; }
 	}

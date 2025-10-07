@@ -13,11 +13,12 @@ namespace Game.Scripts.CoreGameplay.Controllers
 	public class BattleController : IBattleControllerListener, IBattleControllerCommand, IBattleControllerData,
 		IAsyncStartable
 	{
+		private const int MAX_TURN_POINTS = 10;
+
 		#region IBattleControllerListener implementation
 
 		public event Action OnBattleLoaded;
-		public event Action OnTurnPointsSpend;
-		public event Action OnTurnPointsRestore;
+		public event Action OnTurnPointsChanged;
 		public event Action OnAbilitiesQueueChanged;
 
 		#endregion
@@ -28,7 +29,7 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		private List<AbilityData> _playerActionsQueue;
 		public List<AbilityData> AbilitiesQueue => _playerActionsQueue;
 
-		public int TurnPoints => 10;
+		public int CurrentTurnPoints => _currentTurnsCount;
 
 		public CharacterData PlayerData => _playerData;
 		public CharacterData EnemyData => _enemyData;
@@ -43,30 +44,37 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		public async UniTask StartAsync(CancellationToken cancellation = new CancellationToken())
 		{
 			_playerActionsQueue = new List<AbilityData>();
-			Debug.Log("Starting Battle Controller");
+			_currentTurnsCount = 2; //TODO from config
+			_maxTurnsCount = 2;
 
 			//Todo factory, convert from data to stats;
 
 			_playerData = _matchmakingData.CharacterBattleData[0].PlayerData;
 			_enemyData = _matchmakingData.CharacterBattleData[0].PlayerData;
 
-			await UniTask.Delay(TimeSpan.FromSeconds(4), cancellationToken: cancellation);
+			await UniTask.Delay(TimeSpan.FromSeconds(2), cancellationToken: cancellation);
 
 			OnBattleLoaded?.Invoke();
-			StartTurn();
 
 			Debug.Log("Battle Controller loaded");
 		}
 
-		public void AddPlayerAction(AbilityData action)
+		public void AddAbilityToQueue(AbilityData data)
 		{
-			_playerActionsQueue.Add(action);
+			if (_currentTurnsCount - data.Price < 0)
+			{
+				return;
+			}
+
+			SpendTurnPoints(data.Price);
+			_playerActionsQueue.Add(data);
 			OnAbilitiesQueueChanged?.Invoke();
 		}
 
-		public void RemovePlayerAction(AbilityData action)
+		public void RemoveAbilityFromQueue(AbilityData data)
 		{
-			_playerActionsQueue.Remove(action);
+			AddTurnsPoints(data.Price);
+			_playerActionsQueue.Remove(data);
 			OnAbilitiesQueueChanged?.Invoke();
 		}
 
@@ -78,20 +86,20 @@ namespace Game.Scripts.CoreGameplay.Controllers
 				_currentTurnsCount = _maxTurnsCount;
 			}
 
-			OnTurnPointsRestore?.Invoke();
+			OnTurnPointsChanged?.Invoke();
 		}
 
 		private void SpendTurnPoints(int points)
 		{
 			_currentTurnsCount -= points;
-			OnTurnPointsSpend?.Invoke();
+			OnTurnPointsChanged?.Invoke();
 		}
 
 		public void IncreaseMaxTurnPoints(int points)
 		{
 			_maxTurnsCount += points;
-			if (_maxTurnsCount > 10)
-				_maxTurnsCount = 10;
+			if (_maxTurnsCount > MAX_TURN_POINTS)
+				_maxTurnsCount = MAX_TURN_POINTS;
 		}
 
 		public void MarkAsReady()
@@ -102,18 +110,6 @@ namespace Game.Scripts.CoreGameplay.Controllers
 		public void EndOfTurn()
 		{
 			_matchmakingCommand.PlayerEndTurn();
-		}
-
-		public void AddAbilityToQueue(AbilityData data)
-		{
-			_playerActionsQueue.Add(data);
-			OnAbilitiesQueueChanged?.Invoke();
-		}
-
-		public void RemoveAbilityFromQueue(AbilityData data)
-		{
-			_playerActionsQueue.Remove(data);
-			OnAbilitiesQueueChanged?.Invoke();
 		}
 
 		public void StartTurn()

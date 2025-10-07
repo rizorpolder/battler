@@ -29,7 +29,11 @@ namespace Game.Scripts.CoreGameplay.Views
 		public void Start()
 		{
 			_battleControllerListener.OnBattleLoaded += OnBattleLoadedHandler;
-			_buttonPool = _objectsPoolFactory.CreatePool(_parent, _buttonPrefab);
+		}
+
+		private void OnPointsChangedHandler()
+		{
+			UpdateActionsView();
 		}
 
 		private void OnBattleLoadedHandler()
@@ -41,10 +45,13 @@ namespace Game.Scripts.CoreGameplay.Views
 			if (_unitControl != TUnitControl.Player)
 				return;
 
-			UpdateActions();
+			_battleControllerListener.OnTurnPointsChanged += OnPointsChangedHandler;
+			_buttonPool = _objectsPoolFactory.CreatePool(_parent, _buttonPrefab);
+
+			InitializePlayerActions();
 		}
 
-		private void UpdateActions()
+		private void InitializePlayerActions()
 		{
 			foreach (var abilityData in _characterData.Abilities)
 			{
@@ -54,15 +61,25 @@ namespace Game.Scripts.CoreGameplay.Views
 			}
 		}
 
+		private void UpdateActionsView()
+		{
+			var activeItems = _buttonPool.GetActiveItemsList();
+			for (int index = 0; index < _characterData.Abilities.Count; index++)
+			{
+				var abilityData = _characterData.Abilities[index];
+				activeItems[index].SetInteractable(abilityData.Price <= _battleControllerData.CurrentTurnPoints);
+			}
+		}
+
 		private void OnButtonClickedHandler(AbilityData obj)
 		{
-			//check turn points
 			_battleControllerCommand.AddAbilityToQueue(obj);
 		}
 
 		private void OnDestroy()
 		{
 			_battleControllerListener.OnBattleLoaded -= OnBattleLoadedHandler;
+			_battleControllerListener.OnTurnPointsChanged -= OnPointsChangedHandler;
 		}
 	}
 
