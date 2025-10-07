@@ -1,5 +1,4 @@
 using Game.Scripts.Common;
-using Game.Scripts.Common.Flappy_Bird.Scripts.Common;
 using Game.Scripts.CoreGameplay.Controllers;
 using Game.Scripts.CoreGameplay.Data;
 using Spine.Unity;

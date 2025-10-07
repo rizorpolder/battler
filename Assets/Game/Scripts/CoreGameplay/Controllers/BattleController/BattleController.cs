@@ -51,7 +51,7 @@ namespace Game.Scripts.CoreGameplay.Controllers
 
 			_playerData = _matchmakingData.CharacterBattleData[0].PlayerData;
 			_enemyData = _matchmakingData.CharacterBattleData[0].PlayerData;
-
+			
 			await UniTask.Delay(TimeSpan.FromSeconds(2), cancellationToken: cancellation);
 
 			OnBattleLoaded?.Invoke();

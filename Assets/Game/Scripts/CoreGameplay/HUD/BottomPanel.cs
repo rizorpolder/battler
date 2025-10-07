@@ -1,5 +1,4 @@
 using Game.Scripts.Common;
-using Game.Scripts.Common.Flappy_Bird.Scripts.Common;
 using Game.Scripts.CoreGameplay.Controllers;
 using Game.Scripts.CoreGameplay.Data;
 using UnityEngine;
@@ -38,6 +37,7 @@ namespace Game.Scripts.CoreGameplay.HUD
 			{
 				var item = _pool.GetItem();
 				item.Initialize(abilityData);
+				item.transform.SetAsFirstSibling();
 				item.OnButtonClicked += OnAbilityClickHandler;
 			}
 		}
